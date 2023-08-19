@@ -1,4 +1,4 @@
-import Switch from "../btn/Switch";
+import Switch from "../Switch";
 
 function TableRowRight(props) {
   return (

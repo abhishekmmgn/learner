@@ -1,6 +1,5 @@
 import { useState } from "react";
-import PrimaryBtn from "../components/btn/PrimaryBtn";
-import TertiaryBtn from "../components/btn/TertiaryBtn";
+import { Link } from "react-router-dom";
 
 export default function CreateProfile() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -31,8 +30,8 @@ export default function CreateProfile() {
           className={`w-full border border-transparent border-b-gray-400 bg-transparent h-12 px-2 py-[0.25rem] text-base font-normal leading-[1.6] text-black placeholder-gray-800 outline-none transition duration-200 focus:outline-none sm:h-14 sm:px-4 sm:text-base+ md:text-lg`}
         />
         <div className="mt-6 w-full flex flex-col gap-3 items-center justify-center">
-          <PrimaryBtn title="Sign In" />
-          <TertiaryBtn title="Create Account" />
+          <button className="btn" onClick={handleSubmit}>Sign In</button>
+          <Link to='/register'><button className="btn-text">Create Account</button></Link>
         </div>
       </div>
     </div>

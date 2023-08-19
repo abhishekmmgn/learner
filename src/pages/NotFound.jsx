@@ -1,4 +1,4 @@
-import TertiaryBtn from "../components/btn/TertiaryBtn";
+import { Link } from "react-router-dom";
 
 export default function CreateProfile() {
   return (
@@ -9,7 +9,8 @@ export default function CreateProfile() {
         </h1>
         <p className="text-center text-lg font-medium text-gray-800 lg:text-lg+">Nothing here.</p>
       </div>
-      <TertiaryBtn title="Goto Home Page" />
+      <Link to='/'><button className="btn">Go to Homepage</button></Link>
     </div>
   );
 }
+

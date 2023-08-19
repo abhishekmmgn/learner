@@ -1,18 +1,18 @@
-import PrimaryBtn from "../components/btn/PrimaryBtn";
-
 export default function Subscription() {
   return (
-    <div className="flex flex-col justify-center px-4 w-full md:items-center">
-      <p className="font-medium text-gray-800 text-base md:text-center">
-        Learner <span className="text-red-500">Pro</span>
-      </p>
-      <h1 className="text-3xl font-semibold md:text-center">
-        Explore all courses.<span className="block">All Access</span>
-      </h1>
-      <p className="font-medium text-gray-800 mt-1 mb-4 text-base+ md:text-center">
-        Learn anywhere. Cancel anytime.
-      </p>
-      <PrimaryBtn title="Subscribe Now" />
+    <div className="h-full">
+      <div className="flex flex-col items-center justify-center px-4 h-full w-full bg-background-light">
+        <p className="text-center font-medium text-black-secondary text-base md:text-base+">
+          Learner <span className="text-red-500">Pro</span>
+        </p>
+        <h1 className="text-center text-3xl font-semibold md:text-5xl">
+          Explore all courses.<span className="block">All Access</span>
+        </h1>
+        <p className="text-center font-medium text-black-secondary mt-1 mb-4 text-base+ md:text-center md:text-lg">
+          Learn anywhere. Cancel anytime.
+        </p>
+        <button className="btn">Subscribe Now</button>
+      </div>
     </div>
   );
 }

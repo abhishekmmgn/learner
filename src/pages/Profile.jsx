@@ -1,9 +1,11 @@
 import TableRowRight from "../components/cards/TableRowRight";
-import TertiaryBtn from "../components/btn/TertiaryBtn";
 
 export default function Profile() {
   const name = "John Doe";
   const email = "johndoe123@yahoo.com";
+  function handleLogout () {
+    console.log('Logout')
+  }
   return (
     <div className="px-4 gap-6 mx-auto bg-[#f2f2f2] py-4 max-w-[720px] w-full rounded-lg flex flex-col items-center">
       <div className="flex flex-col gap-3">
@@ -16,7 +18,7 @@ export default function Profile() {
       </div>
       <div className="w-full space-y-3">
         <TableRowRight title='Dark Mode' item= 'switch' />
-        <TertiaryBtn title='Logout' />
+        <button className="btn" onClick={handleLogout}>Logout</button>
       </div>
     </div>
   );

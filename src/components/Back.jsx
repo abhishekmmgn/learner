@@ -3,7 +3,7 @@ import { GoChevronLeft } from "react-icons/go";
 export default function Back() {
   return (
     <div
-      className="w-full bg-white-secondary] sticky top-0 left-0 right-0 px-4 h-11 container max-w-full flex items-center md:h-16 md:px-6"
+      className=" backdrop-filter backdrop-blur-lg bg-opacity-90 w-full bg-background-light sticky top-0 left-0 right-0 px-4 h-11 flex items-center md:h-16 md:px-6"
       onClick={() => window.history.back()}
       >
       <div className="flex items-center hover:text-gray-700 cursor-pointer">

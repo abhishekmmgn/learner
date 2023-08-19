@@ -7,38 +7,54 @@ export default function TabBar() {
   const isKeyboardOpen = useDetectKeyboardOpen();
   return (
     <div
-      className={`fixed z-50 left-0 right-0 bottom-0 w-full bg-[#f2f2f2] h-[52px] flex items-center ${
-        isKeyboardOpen ? "hidden" : ""
+      className={`backdrop-filter backdrop-blur-lg bg-opacity-90 fixed z-50 inset-x-0 bottom-0 w-full bg-background-light h-[52px] pb-1 flex items-center ${
+        isKeyboardOpen && "hidden"
       } md:hidden`}
     >
-      <Link
-        to="/"
-        className="h-full w-1/4 flex flex-col items-center justify-center"
-      >
-        <GoTelescope className="h-5 text-xl text-gray-600" />
-        <p className="text-sm text-gray-600">Explore</p>
-      </Link>
-      <Link
-        to="/library"
-        className="h-full w-1/4 flex flex-col items-center justify-center"
-      >
-        <BiLibrary className="h-5 text-xl text-gray-600" />
-        <p className="text-sm text-gray-600">Library</p>
-      </Link>
-      <Link
-        to="/search"
-        className="h-full w-1/4 flex flex-col items-center justify-center"
-      >
-        <BiSearch className="h-5 text-xl text-gray-600" />
-        <p className="text-sm text-gray-600">Search</p>
-      </Link>
-      <Link
-        to="/subscription"
-        className="h-full w-1/4 flex flex-col items-center justify-center"
-      >
-        <BiBadgeCheck className="h-5 text-xl text-gray-600" />
-        <p className="text-sm text-gray-600">Pro</p>
-      </Link>
+      <div className="w-1/4 h-full px-5 sm:px-12">
+        <Link
+          to="/"
+          className="h-full flex flex-col items-center justify-end group"
+        >
+          <GoTelescope className="text-xl text-black-secondary group-hover:text-pink-light" />
+          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+            Explore
+          </p>
+        </Link>
+      </div>
+      <div className="w-1/4 h-full px-5 sm:px-12">
+        <Link
+          to="/library"
+          className="h-full flex flex-col items-center justify-end group"
+        >
+          <BiLibrary className="text-xl text-black-secondary group-hover:text-pink-light" />
+          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+            Library
+          </p>
+        </Link>
+      </div>
+      <div className="w-1/4 h-full px-5 sm:px-12">
+        <Link
+          to="/search"
+          className="h-full flex flex-col items-center justify-end group"
+        >
+          <BiSearch className="text-xl text-black-secondary group-hover:text-pink-light" />
+          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+            Search
+          </p>
+        </Link>
+      </div>
+      <div className="w-1/4 h-full px-5 sm:px-12">
+        <Link
+          to="/subscription"
+          className="h-full flex flex-col items-center justify-end group"
+        >
+          <BiBadgeCheck className="text-xl text-black-secondary group-hover:text-pink-light" />
+          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+            Pro
+          </p>
+        </Link>
+      </div>
     </div>
   );
 }

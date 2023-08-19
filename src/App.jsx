@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import TabBar from "./components/TabBar";
@@ -19,9 +18,10 @@ import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
-    <div>
-      <div className="md:grid md:grid-cols-[200px_auto]">
-        <Header />
+    <div className="h-screen">
+      <Header />
+      <main className="h-full mt-[52px] md:mt-14 md:grid md:grid-cols-[200px_auto]">
+        <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search">
@@ -31,10 +31,9 @@ export default function App() {
           <Route path="/library" element={<Library />} />
           <Route path="/subscription" element={<Subscription />} />
         </Routes>
-        <TabBar />
-        <Sidebar />
-      </div>
-      <div>
+      </main>
+      <TabBar />
+      {/* <div>
         <Back />
         <Routes>
           <Route path="/course/:id" element={<CourseDetails />} />
@@ -49,7 +48,7 @@ export default function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
-      </div>
+      </div> */}
     </div>
   );
 }

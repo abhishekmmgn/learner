@@ -1,16 +1,17 @@
 function TopicCard(props) {
   return (
-    <div className="relative min-w-[calc(100%-16px)] w-full max-w-[360px] h-40 rounded-xl sm:min-w-[332px] lg:min-w-[360px] lg:h-40">
+    <div className="relative border-gray-light-500 w-[calc(100%-24px)] max-w-[372px] aspect-video rounded-xl hover:bg-gray-light-700">
       <img
         src={props.photo}
         alt="Topic Photo"
-        className="absolute top-0 left-0 bg-gray-200 border border-gray-300 w-full h-full rounded-xl"        /> 
-      <div className='absolute top-0 left-0 w-full h-full bg-black/20 rounded-xl lg:min-w-[360px] lg:h-40'></div>
-      <p className='absolute bottom-4 left-4 text-white text-lg lg:text-lg+'>
+        className="absolute top-0 inset-x-0 bg-gray-light-500 w-full object-cover aspect-video rounded-md"
+      />
+      <div className="absolute top-0 inset-x-0 bg-black-primary/20 w-full object-cover aspect-video rounded-xl hover:bg-black-primary/10"></div>
+      <p className="absolute bottom-3 left-3 text-white text-base+ md:text-lg lg:text-lg+ overflow-clip">
         {props.topic}
       </p>
     </div>
-  )
+  );
 }
-  
+
 export default TopicCard;

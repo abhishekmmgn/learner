@@ -1,15 +1,38 @@
-import { GoSearch, GoTelescope } from 'react-icons/go';
-import { BiLibrary, BiBadgeCheck } from 'react-icons/bi';
-import { TbLayoutSidebarLeftCollapse } from 'react-icons/tb';
+import { GoTelescope } from "react-icons/go";
+import { BiSearch, BiLibrary, BiBadgeCheck } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div className="hidden sticky border-r border-r-neutral-200 bg-[#f2f2f2] top-0 left-0 py-4 px-2 min-h-screen w-[200px] md:flex flex-col">
-      <TbLayoutSidebarLeftCollapse className='mb-2 ml-4 text-right h-5 text-xl text-gray-500 hover:text-gray-700' />
-      <div className="pl-4 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 hover:bg-gray-300 focus:bg-gray-300">
-        <GoTelescope className="text-base text-gray-600 hover:text-gray-600" />
-        <p className='text-base font-medium text-gray-600 hover:text-gray-600'>Explore</p>
-      </div>
+    <div className="z-40 hidden sticky inset-y-0 left-0 backdrop-filter backdrop-blur-lg bg-opacity-90 border-r border-r-gray-light-500 bg-background-light py-4 pl-2 pr-2 w-[200px] md:flex md:flex-col md:h-screen space-y-2">
+      <Link
+        to="/"
+        className="pl-4 rounded-lg h-10 w-full flex flex-row items-center justify-start gap-4 group hover:bg-pink-light/20"
+      >
+        <GoTelescope className="text-2xl text-black-secondary " />
+        <p className="text-lg font-medium text-black-secondary">Explore</p>
+      </Link>
+      <Link
+        to="/search"
+        className="pl-4 rounded-lg h-10 w-full flex flex-row items-center justify-start gap-4 group hover:bg-pink-light/20"
+      >
+        <BiSearch className="text-2xl text-black-secondary" />
+        <p className="text-lg font-medium text-black-secondary">Search</p>
+      </Link>
+      <Link
+        to="/library"
+        className="pl-4 rounded-lg h-10 w-full flex flex-row items-center justify-start gap-4 group hover:bg-pink-light/20"
+      >
+        <BiLibrary className="text-2xl text-black-secondary" />
+        <p className="text-lg font-medium text-black-secondary">Library</p>
+      </Link>
+      <Link
+        to="/subscription"
+        className="pl-4 rounded-lg h-10 w-full flex flex-row items-center justify-start gap-4 group hover:bg-pink-light/20"
+      >
+        <BiBadgeCheck className="text-2xl text-black-secondary" />
+        <p className="text-lg font-medium text-black-secondary">Pro</p>
+      </Link>
     </div>
-  )
+  );
 }
