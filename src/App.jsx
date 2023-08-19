@@ -20,7 +20,7 @@ export default function App() {
   return (
     <div className="h-screen">
       <Header />
-      <main className="h-full mt-[52px] md:mt-14 md:grid md:grid-cols-[200px_auto]">
+      <main className="h-full mt-[52px] md:mt-14 md:grid md:grid-cols-[200px_auto] lg:grid-cols-[232px_auto]">
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -38,10 +38,6 @@ export default function App() {
         <Routes>
           <Route path="/course/:id" element={<CourseDetails />} />
           <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </div>
-      <div>
-        <Routes>
           <Route path="/create-profile" element={<CreateProfile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
