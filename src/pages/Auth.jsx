@@ -2,21 +2,23 @@ import { Link } from "react-router-dom";
 
 export default function Auth() {
   return (
-    <div className="h-full">
-      <div className="border-2 mx-auto relative bg-white-secondary p-4 max-h-[800px] w-full flex flex-col items-center justify-between sm:justify-center">
-        <h1 className="text-center text-4xl sm:text-5xl md:text-6xl">
+    <div className="flex flex-col items-center justify-between px-4 h-full w-full bg-background-light sm:justify-center sm:space-y-20">
+      <div>
+        <h1 className="mt-16 text-4xl font-semibold md:text-5xl lg:text-6xl sm:text-center sm:mt-0">
           Learner
         </h1>
-        <p className="mt-2 mb-10 text-center text-lg font-medium sm:text-lg+ md:text-xl">
-          The best way to learn anything you want.
+        <p className="text-lg text-black-secondary font-medium md:text-lg+ lg:text-xl sm:text-center ">
+          The best place to learn anything you want to.
         </p>
       </div>
-      <div className="w-full flex flex-col items-center gap-3">
+      <div className="mb-16 flex flex-col space-y-4 w-full sm:mb-0">
         <Link to="/register">
-          <button className="btn">Create Account</button>
+          <button className="btn mx-auto">Create Account</button>
         </Link>
         <Link to="/login">
-          <button className="btn-outline">Sign In</button>
+          <button className="btn-outline mx-auto">
+            Log in to Existing Account
+          </button>
         </Link>
       </div>
     </div>
