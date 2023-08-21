@@ -56,7 +56,9 @@ export default {
       }      
     },
     fontSize: {
-      sm: '0.75rem',
+      xs: '0.75rem',
+      'xs+': '0.8125rem',
+      sm: '0.875rem',
       'sm+': '0.9375rem',
       base: '1rem',
       'base+': '1.0625rem',
