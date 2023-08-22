@@ -2,12 +2,12 @@ import CourseCardGallery from "../components/cards/CourseCardGallery";
 import { Link } from "react-router-dom";
 
 export default function Library(props) {
-  const hasCourses = false;
+  const hasCourses = true;
 
   return (
     <div className="h-full">
       {hasCourses ? (
-        <div className="pl-4 space-y-6 bg-gray-6-light">
+        <div className="pl-4 space-y-6 bg-gray-6-light md:px-6">
           <CourseCardGallery
             enrolled={true}
             title="Currently Learning"

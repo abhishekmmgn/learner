@@ -1,7 +1,7 @@
 
 export default function SuggestionCard(props) {
   return (
-    <div className="relative border-gray-light-500 w-[calc(50%-6px)] max-w-[320px] aspect-video rounded-xl hover:bg-gray-light-700 lg:w-[calc(25%-12px)]">
+    <div className="relative border-gray-light-500 aspect-video max-w-sm rounded-xl hover:bg-gray-light-700">
       <img
         src={props.photo}
         alt="Topic Photo"

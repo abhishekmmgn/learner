@@ -18,7 +18,7 @@ export default function CourseDetails(props) {
           <h1 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
             How to Sell Drugs Online
           </h1>
-          <p className="mb-4 text-base text-black-secondary overflow-hidden max-h-20 sm:text-base+ md:text-lg lg:text-lg+ md:mb-4 ">
+          <p className="mb-4 text-base text-black-tertiary overflow-hidden max-h-20 sm:text-base+ md:text-lg md:mb-4 ">
             To impress his former girlfriend, a nerdy teen starts selling drugs
             online out of his bedroom, and soon becomes one of Europe's biggest
             dealers.
@@ -39,7 +39,7 @@ export default function CourseDetails(props) {
             <p className="mb-2 text-black-tertiary">2 months</p>
             <p className="font-medium text-black-secondary">Teachers</p>
             <p className="mb-2 text-black-tertiary">
-              Brendon Hunt, Jason Sudeikis, Hannah Waddingham,{" "}
+              Brendon Hunt, Jason Sudeikis, Hannah Waddingham, Juno Temple, Nick Mohammad, Bred Goldstein 
             </p>
             <p className="font-medium text-black-secondary">Students</p>
             <p className="text-black-tertiary">120K</p>

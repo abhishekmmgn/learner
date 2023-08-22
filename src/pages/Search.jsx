@@ -17,8 +17,8 @@ export default function Search() {
         </div>
       ) : (
         <div className="px-4 bg-transparent md:px-6">
-          <h1 className="mb-2 text-2xl font-semibold md:mb-3 md:text-3xl lg:text-4xl">Browse Topics</h1>
-          <div className="flex gap-3 flex-wrap overflow-y-scroll xl:gap-4">
+          <h1 className="my-2 text-2xl font-semibold md:text-3xl lg:text-4xl">Browse Topics</h1>
+          <div className="grid grid-cols-2 gap-3 overflow-y-scroll sm:grid-cols-3 lg:grid-cols-4">
             <SuggestionCard
               photo="https://picsum.photos/500/200"
               topic="Beginner"
