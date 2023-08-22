@@ -11,7 +11,7 @@ export default function Auth() {
           The best place to learn anything you want to.
         </p>
       </div>
-      <div className="mb-16 flex flex-col space-y-4 w-full sm:mb-0">
+      <div className="mb-16 flex flex-col space-y-3 w-full sm:mb-0">
         <Link to="/register">
           <button className="btn mx-auto">Create Account</button>
         </Link>

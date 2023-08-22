@@ -12,12 +12,12 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start space-y-8 px-4 h-full w-full bg-background-light sm:justify-center sm:space-y-20">
+    <div className="flex flex-col items-center justify-center space-y-4 px-4 h-full w-full bg-background-light sm:justify-center sm:space-y-8">
       <h1 className="w-full text-4xl font-semibold text-center md:text-5xl lg:text-6xl">
         Create Account
       </h1>
-      <div className="flex flex-col items-center space-y-6 w-full">
-        <div className="w-full flex flex-col items-center">
+      <div className="flex flex-col items-center space-y-3 w-full">
+        <form className="w-full flex flex-col items-center space-y-4">
           <input
             type="email"
             placeholder="Email"
@@ -32,15 +32,15 @@ export default function Register() {
             onChange={handleChange}
             className={`w-full max-w-sm border-b border-gray-light-400 bg-transparent h-12 px-2 py-[0.25rem] text-base font-normal leading-[1.6] text-black placeholder-gray-800 outline-none transition duration-200 focus:outline-none sm:h-14 sm:px-4 sm:text-base+ md:text-lg`}
           />
-        </div>
-        <div className="w-full">
-          <button className="btn mx-auto mb-4" onClick={handleSubmit}>
+          <button className="btn mx-auto" onClick={handleSubmit}>
             Create Account
           </button>
-          <Link to="/login" className="w-full">
-            <button className="btn-text mx-auto">Log in to Existing Account</button>
-          </Link>
-        </div>
+        </form>
+        <Link to="/login" className="w-full">
+          <button className="btn-text mx-auto">
+            Log in to Existing Account
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -18,8 +18,14 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <div className="h-screen">
+      <Routes>
+        <Route path="/create-profile" element={<CreateProfile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
       {/* <Header /> */}
-      <main className=" mx-auto md:w-[768px] lg:w-[1024px] h-full md:grid md:grid-cols-[200px_auto] lg:grid-cols-[232px_auto]">
+      {/* <main className=" mx-auto md:w-[768px] lg:w-[1024px] h-full md:grid md:grid-cols-[200px_auto] lg:grid-cols-[232px_auto]">
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -33,16 +39,11 @@ export default function App() {
             <Route path="/search/:id" element={<SearchResults />} />
             </Route>
             <Route path="/library" element={<Library />} />
-          <Route path="/subscription" element={<Subscription />} /> */}
+          <Route path="/subscription" element={<Subscription />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
-      </main>
-      {/* <TabBar /> */}
-      {/* <div>
-        <Back />
-        <Routes>
-          </Routes>
-        </div> */}
+      </main> 
+  // <Tabbar /> */}
     </div>
   );
 }

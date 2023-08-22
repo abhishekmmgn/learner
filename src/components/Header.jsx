@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useStore } from "zustand";
 
 export default function Header() {
+
   return (
     <div className="sticky z-50 flex items-center backdrop-filter backdrop-blur-lg bg-opacity-90 bg-background-light top-0 inset-x-0 h-[52px] w-full md:h-14">
       <div className="flex items-center justify-between w-full px-4 md:px-0 mx-auto md:w-[768px] lg:w-[1024px]">

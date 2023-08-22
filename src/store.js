@@ -1,7 +1,11 @@
-import { create } from 'zustand'
+import { create } from "zustand"
 
 const useStore = create((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
+  email: '',
+  password: '',
+  setEmail: (firstName) => set(() => ({ firstName: firstName })),
+  setPassword: (lastName) => set(() => ({ lastName: lastName })),
 }))
+
+
+export default useStore
