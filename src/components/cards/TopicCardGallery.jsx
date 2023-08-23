@@ -10,7 +10,7 @@ export default function TopicCardGallery(props) {
         </h1>
         <GoChevronRight className="text-black text-2xl mt-1 lg:mt-2" />
       </div>
-      <div className="h-full flex flex-row gap-3 overflow-visible overflow-x-scroll sm:gap-4">
+      <div className="h-full flex flex-row gap-3 overflow-visible overflow-x-scroll">
         <TopicCard
           photo="https://picsum.photos/320/132"
           topic="Life Sciences"

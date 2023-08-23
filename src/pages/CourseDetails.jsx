@@ -13,7 +13,7 @@ export default function CourseDetails(props) {
           alt="Course Photo"
           className="w-full aspect-video max-w-4xl bg-gray-light-500"
         />
-        <div className="px-4 md:px-6">
+        <div className="px-4 md:px-8">
           <p className="mt-3 text-xs text-gray-700">{props.level}</p>
           <h1 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
             How to Sell Drugs Online

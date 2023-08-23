@@ -14,9 +14,9 @@ export default function LayoutOne() {
   return (
     <>
       <Header />
-      <main className="mx-auto mt-[52px] h-full md:mt-14 md:ml-[200px] lg:ml-[232px] xl:ml-[248px] max-w-[1536px] 2xl:ml-auto">
+      <main className="mx-auto mt-[52px] h-full md:ml-[220px] xl:ml-[232px] max-w-[1536px] 2xl:mx-auto">
         <Sidebar />
-        <div className="w-full h-full 2xl:pl-[248px]">
+        <div className="w-full h-full 2xl:pl-[220px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/course/:id" element={<CourseDetails />} />

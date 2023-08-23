@@ -1,5 +1,4 @@
-import { GoTelescope } from "react-icons/go";
-import { BiSearch, BiLibrary, BiBadgeCheck } from "react-icons/bi";
+import { GoTelescope, GoSearch, GoBook, GoFlame, GoPerson } from "react-icons/go";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import { Link } from "react-router-dom";
 
@@ -16,8 +15,8 @@ export default function TabBar() {
           to="/"
           className="h-full flex flex-col items-center justify-end group"
         >
-          <GoTelescope className="text-xl text-black-secondary group-hover:text-pink-light" />
-          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+          <GoTelescope className="text-xl text-black-tertiary group-hover:text-pink-light" />
+          <p className="text-sm text-black-tertiary group-hover:text-pink-light">
             Explore
           </p>
         </Link>
@@ -27,8 +26,8 @@ export default function TabBar() {
           to="/library"
           className="h-full flex flex-col items-center justify-end group"
         >
-          <BiLibrary className="text-xl text-black-secondary group-hover:text-pink-light" />
-          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+          <GoBook className="text-xl text-black-tertiary group-hover:text-pink-light" />
+          <p className="text-sm text-black-tertiary group-hover:text-pink-light">
             Library
           </p>
         </Link>
@@ -38,8 +37,8 @@ export default function TabBar() {
           to="/search"
           className="h-full flex flex-col items-center justify-end group"
         >
-          <BiSearch className="text-xl text-black-secondary group-hover:text-pink-light" />
-          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+          <GoSearch className="text-xl text-black-tertiary group-hover:text-pink-light" />
+          <p className="text-sm text-black-tertiary group-hover:text-pink-light">
             Search
           </p>
         </Link>
@@ -49,8 +48,8 @@ export default function TabBar() {
           to="/subscription"
           className="h-full flex flex-col items-center justify-end group"
         >
-          <BiBadgeCheck className="text-xl text-black-secondary group-hover:text-pink-light" />
-          <p className="text-sm text-black-secondary group-hover:text-pink-light">
+          <GoFlame className="text-xl text-black-tertiary group-hover:text-pink-light" />
+          <p className="text-sm text-black-tertiary group-hover:text-pink-light">
             Pro
           </p>
         </Link>

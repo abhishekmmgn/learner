@@ -11,14 +11,14 @@ export default function Search() {
     <div>
       <SearchBar />
       {isKeyboardOpen ? (
-        <div className="px-4 mt-1 md:max-w-[720px] md:px-0 lg:max-w-[828px] md:mx-auto ">
+        <div className="px-4 mt-1 md:max-w-[720px] lg:max-w-[828px] md:mx-auto md:px-auto">
           <SearchResultCard title="Learning react with practical knowledge" />
           <SearchResultCard title="Learning react with practical knowledge" />
         </div>
       ) : (
-        <div className="px-4 bg-transparent md:px-6">
+        <div className="px-4 bg-transparent md:px-8">
           <h1 className="my-2 text-2xl font-semibold md:text-3xl lg:text-4xl">Browse Topics</h1>
-          <div className="grid grid-cols-2 gap-3 overflow-y-scroll sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 overflow-y-scroll sm:grid-cols-3 lg:grid-cols-4 md:gap-3">
             <SuggestionCard
               photo="https://picsum.photos/500/200"
               topic="Beginner"
