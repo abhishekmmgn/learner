@@ -16,7 +16,7 @@ export default function SearchResults() {
           <SearchResultCard title="Learning react with practical knowledge" />
         </div>
       ) : (
-        <div className="px-4 mt-2 mx-auto flex flex-col gap-3 items-center md:px-6 md:gap-4 md:mt-3">
+        <div className="px-4 mx-auto flex flex-col gap-3 items-center">
           <CourseCardStretched
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"

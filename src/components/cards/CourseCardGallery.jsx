@@ -7,7 +7,7 @@ function CourseCardGallery(props) {
   return (
     <div className="w-full bg-transparent">
       <div className="mb-3 flex items-center">
-        <h1 className="max-w-[332px] text-2xl font-semibold md:text-3xl lg:text-4xl lg:max-w-[80%]">
+        <h1 className="max-w-[332px] text-2xl font-semibold max-h-10 md:max-h-12 overflow-hidden md:text-3xl xl:text-4xl lg:max-w-[80%]">
           {props.title}
         </h1>
         <GoChevronRight className="mt-1 text-black text-2xl md:text-3xl lg:text-4xl" />
@@ -24,19 +24,19 @@ function CourseCardGallery(props) {
           <EnrolledCourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
+            progress={0}
             photo="https://picsum.photos/340/131"
           />
           <EnrolledCourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
+            progress={56}
             photo="https://picsum.photos/340/131"
           />
           <EnrolledCourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
+            progress={89}
             photo="https://picsum.photos/340/131"
           />
         </div>
@@ -45,25 +45,21 @@ function CourseCardGallery(props) {
           <CourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
             photo="https://picsum.photos/340/131"
           />
           <CourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
             photo="https://picsum.photos/340/131"
           />
           <CourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
             photo="https://picsum.photos/340/131"
           />
           <CourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
-            progress={30}
             photo="https://picsum.photos/340/131"
           />
         </div>

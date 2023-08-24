@@ -4,7 +4,7 @@ export default function Subscription() {
       <p className="text-center font-medium text-black-secondary text-base md:text-base+">
         Learner <span className="text-red-500">Pro</span>
       </p>
-      <h1 className="text-center text-3xl font-semibold md:text-5xl">
+      <h1 className="text-center text-2xl font-semibold md:text-4xl xl:text-5xl">
         Explore all courses.<span className="block">All Access</span>
       </h1>
       <p className="text-center font-medium text-black-secondary mt-1 mb-4 text-base+ md:text-center md:text-lg">

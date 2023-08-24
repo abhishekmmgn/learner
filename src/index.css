@@ -10,12 +10,12 @@
 
 @layer components {
   .btn {
-    @apply min-w-fit font-medium text-white h-11 max-w-sm flex items-center justify-center text-base bg-pink-light container rounded-xl hover:bg-pink-light/90 focus:ring-1 focus:ring-pink-light focus:outline-none md:text-[1.06rem] md:h-12;
+    @apply min-w-fit font-medium text-white h-11 max-w-sm flex items-center justify-center text-base bg-pink-light container rounded-lg hover:bg-pink-light/90 focus:ring-1 focus:ring-pink-light focus:outline-none md:text-[1.06rem];
   }
   .btn-outline {
-    @apply font-medium text-pink-light h-11 max-w-sm flex items-center justify-center text-base bg-transparent border-2 border-pink-light container rounded-xl hover:bg-pink-light/5 focus:ring-1 focus:ring-pink-light/20 focus:outline-none md:text-[1.06rem] md:h-12;
+    @apply font-medium text-pink-light h-11 max-w-sm flex items-center justify-center text-base bg-transparent border-2 border-pink-light container rounded-lg hover:bg-pink-light/5 focus:ring-1 focus:ring-pink-light/20 focus:outline-none md:text-[1.06rem];
   }
   .btn-text {
-    @apply font-medium bg-transparent text-pink-light h-11 max-w-sm flex items-center justify-center text-base container rounded-xl hover:bg-pink-light/10 focus:ring-1 focus:ring-pink-light/10 focus:outline-none md:text-[1.06rem] md:h-12
+    @apply font-medium bg-transparent text-pink-light h-11 max-w-sm flex items-center justify-center text-base container rounded-lg hover:bg-pink-light/10 focus:ring-1 focus:ring-pink-light/10 focus:outline-none md:text-[1.06rem];
   }
 }

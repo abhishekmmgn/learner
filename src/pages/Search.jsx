@@ -16,9 +16,10 @@ export default function Search() {
           <SearchResultCard title="Learning react with practical knowledge" />
         </div>
       ) : (
-        <div className="px-4 bg-transparent md:px-8">
-          <h1 className="my-2 text-2xl font-semibold md:text-3xl lg:text-4xl">Browse Topics</h1>
-          <div className="grid grid-cols-2 gap-2 overflow-y-scroll sm:grid-cols-3 lg:grid-cols-4 md:gap-3">
+        <div className="px-4 bg-transparent">
+          <h1 className="mb-2 text-2xl font-semibold md:text-3xl xl:text-4xl">Browse Topics</h1>
+
+          <div className="w-full grid grid-cols-2 gap-2 overflow-y-scroll xl:grid-cols-3 md:gap-3">
             <SuggestionCard
               photo="https://picsum.photos/500/200"
               topic="Beginner"

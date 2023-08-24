@@ -1,10 +1,10 @@
 export default function CourseCard(props) {
   return (
-    <div className='border border-gray-light-500 w-[calc(100%-24px)] max-w-[412px] flex flex-col bg-white rounded-md hover:bg-gray-light-700'>
+    <div className='border border-gray-light-500 w-[calc(100%-24px)] max-w-[412px] flex flex-col bg-white rounded-lg hover:bg-gray-light-700'>
       <img
         src={props.photo}
         alt="Course Photo"
-        className="bg-gray-light-500 w-full object-cover aspect-video rounded-t-md"
+        className="bg-gray-light-500 w-full object-cover aspect-video rounded-t-lg"
       />
       <div className="h-40 flex flex-col justify-center px-3 w-full  overflow-clip md:h-44">
         <p className="mb-1 text-pink-light text-xs md:text-xs+ lg:text-sm">{props.level}</p>
