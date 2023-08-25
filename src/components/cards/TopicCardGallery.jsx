@@ -6,23 +6,29 @@ export default function TopicCardGallery(props) {
     <div className="w-full bg-transparent">
       <div className="mb-3 flex items-center">
         <h1 className="max-w-[332px] text-2xl font-semibold max-h-10 md:max-h-12 overflow-hidden md:text-3xl xl:text-4xl">
-        {props.title}
+          {props.title}
         </h1>
         <GoChevronRight className="text-black text-2xl mt-1 lg:mt-2" />
       </div>
       <div className="h-full flex flex-row gap-3 overflow-visible overflow-x-scroll">
         <TopicCard
-          photo="https://picsum.photos/320/132"
+          photo="https://source.unsplash.com/random"
           topic="Life Sciences"
         />
-        <TopicCard photo="https://picsum.photos/320/133" topic="Microbiology" />
         <TopicCard
-          photo="https://picsum.photos/320/132"
+          photo="https://source.unsplash.com/random"
+          topic="Microbiology"
+        />
+        <TopicCard
+          photo="https://source.unsplash.com/random"
           topic="Life Sciences"
         />
-        <TopicCard photo="https://picsum.photos/320/133" topic="Microbiology" />
         <TopicCard
-          photo="https://picsum.photos/320/132"
+          photo="https://source.unsplash.com/random"
+          topic="Microbiology"
+        />
+        <TopicCard
+          photo="https://source.unsplash.com/random"
           topic="Life Sciences"
         />
       </div>

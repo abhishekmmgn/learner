@@ -2,7 +2,7 @@ import LayoutOne from "./layouts/LayoutOne";
 import LayoutTwo from "./layouts/LayoutTwo";
 
 export default function App() {
-  const authPage = true;
+  const authPage = false;
   return (
     <div className="h-screen">
       {authPage ? (

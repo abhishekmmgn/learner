@@ -5,17 +5,40 @@
 
 :root {
   background: #F2F2F7;
+  color: #000;
   box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background: #101010;
+    color: #FFF;
+  }
 }
 
 @layer components {
   .btn {
-    @apply min-w-fit font-medium text-white h-11 max-w-sm flex items-center justify-center text-base bg-pink-light container rounded-lg hover:bg-pink-light/90 focus:ring-1 focus:ring-pink-light focus:outline-none md:text-[1.06rem];
+    @apply min-w-fit font-medium text-white h-11 max-w-sm flex items-center justify-center text-base bg-pink-light container rounded-lg hover:bg-pink-light/90 focus:ring-1 focus:ring-pink-light focus:outline-none md:text-[1.06rem] dark:bg-pink-dark dark:hover:bg-pink-dark/90 dark:text-white-tertiary dark:focus:ring-pink-dark;
   }
   .btn-outline {
-    @apply font-medium text-pink-light h-11 max-w-sm flex items-center justify-center text-base bg-transparent border-2 border-pink-light container rounded-lg hover:bg-pink-light/5 focus:ring-1 focus:ring-pink-light/20 focus:outline-none md:text-[1.06rem];
+    @apply font-medium text-pink-light h-11 max-w-sm flex items-center justify-center text-base bg-transparent border-2 border-pink-light container rounded-lg hover:bg-pink-light/5 focus:ring-1 focus:ring-pink-light/20 focus:outline-none md:text-[1.06rem] dark:text-pink-dark dark:border-pink-dark dark:hover:bg-pink-dark/5 dark:focus:ring-pink-dark;
   }
   .btn-text {
-    @apply font-medium bg-transparent text-pink-light h-11 max-w-sm flex items-center justify-center text-base container rounded-lg hover:bg-pink-light/10 focus:ring-1 focus:ring-pink-light/10 focus:outline-none md:text-[1.06rem];
+    @apply font-medium bg-transparent text-pink-light h-11 max-w-sm flex items-center justify-center text-base container rounded-lg hover:bg-pink-light/10 focus:ring-1 focus:ring-pink-light/10 focus:outline-none md:text-[1.06rem] dark:text-pink-dark dark:hover:bg-pink-dark/10 dark:focus:ring-pink-dark/10;
+  }
+}
+
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
   }
 }

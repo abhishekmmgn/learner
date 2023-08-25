@@ -2,7 +2,7 @@ import CourseCardGallery from "../components/cards/CourseCardGallery";
 import { Link } from "react-router-dom";
 
 export default function Library(props) {
-  const hasCourses = false;
+  const hasCourses = true;
 
   return (
     <div className="h-full">
@@ -28,11 +28,11 @@ export default function Library(props) {
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center px-4 h-full w-full bg-background-light">
+        <div className="flex flex-col items-center justify-center px-4 h-full w-full">
           <h1 className="text-center text-3xl font-semibold md:text-4xl xl:text-5xl">
             You do not have any courses
           </h1>
-          <p className="text-center font-medium text-black-secondary mt-1 mb-4 text-base md:text-lg xl:text-lg+">
+          <p className="text-center font-medium text-black-secondary mt-1 mb-6 text-base md:text-lg xl:text-lg+ dark:text-white-secondary">
             Learn with your library across your devices.
           </p>
           <Link to="/" className="w-full">
