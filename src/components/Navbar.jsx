@@ -3,8 +3,8 @@ import {
   GoSearch,
   GoBook,
   GoFlame,
-  GoTools,
 } from "react-icons/go";
+import { IoSettingsOutline } from "react-icons/io5"
 import { Link } from "react-router-dom";
 
 export default function TabBar() {
@@ -14,31 +14,31 @@ export default function TabBar() {
     >
       <div className="w-1/5 h-full flex items-center justify-center pb-1">
         <Link to="/" className="h-full w-[60%] flex items-center justify-center group">
-          <GoTelescope title='Explore' className="text-lg+ text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
+          <GoTelescope title='Explore' className="text-2xl text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
         </Link>
       </div>
 
       <div className="w-1/5 h-full flex items-center justify-center pb-1">
         <Link to="/library" className="h-full w-[60%] flex items-center justify-center group">
-          <GoBook title='Library' className="text-lg+ text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
+          <GoBook title='Library' className="text-2xl text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
         </Link>
       </div>
 
       <div className="w-1/5 h-full flex items-center justify-center pb-1">
         <Link to="/search" className="h-full w-[60%] flex items-center justify-center group">
-          <GoSearch title='Search' className="text-lg+ text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
+          <GoSearch title='Search' className="text-2xl text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
         </Link>
       </div>
 
       <div className="w-1/5 h-full flex items-center justify-center pb-1">
         <Link to="/subscription" className="h-full w-[60%] flex items-center justify-center group">
-          <GoFlame title='Subscription' className="text-lg+ text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
+          <GoFlame title='Subscription' className="text-2xl text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
         </Link>
       </div>
 
       <div className="w-1/5 h-full flex items-center justify-center pb-1">
         <Link to="/settings" className="h-full w-[60%] flex items-center justify-center group">
-          <GoTools title='Settings' className="text-lg+ text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
+          <IoSettingsOutline title='Settings' className="text-2xl text-black-tertiary group-hover:text-pink-light dark:text-white-tertiary dark:group-hover:text-pink-dark" />
         </Link>
       </div>
     </div>

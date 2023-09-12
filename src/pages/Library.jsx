@@ -2,12 +2,12 @@ import CourseCardGallery from "../components/cards/CourseCardGallery";
 import { Link } from "react-router-dom";
 
 export default function Library(props) {
-  const hasCourses = true;
+  const hasCourses = false;
 
   return (
     <div className="h-full">
       {hasCourses ? (
-        <div className="pl-4 space-y-4">
+        <div className="pl-4 py-8 space-y-4">
           <CourseCardGallery
             enrolled={true}
             title="Currently Learning"
@@ -28,7 +28,7 @@ export default function Library(props) {
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center px-4 h-full w-full">
+        <div className="flex flex-col items-center justify-center px-4 md:px-8 h-full w-full">
           <h1 className="text-center text-3xl font-semibold md:text-4xl xl:text-5xl">
             You do not have any courses
           </h1>

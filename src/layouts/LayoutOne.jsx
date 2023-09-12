@@ -15,9 +15,9 @@ export default function LayoutOne() {
     <>
       <Header />
       <Navbar />
-      <main className="w-full h-full mt-[94px] flex items-center mx-auto md:max-w-5xl xl:max-w-7xl md:mt-[52px]">
-        <Sidebar />
-        <div className="w-full h-full md:pl-[180px] lg:pl-[204px] xl:pl-[232px]">
+      <Sidebar />
+      <main className="w-full h-full mt-[94px] flex items-center mx-auto 2xl:max-w-[1800px] md:mt-[52px]">
+        <div className="w-full h-full md:pl-[210px] lg:pl-[232px] xl:pl-[248px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/course/:id" element={<CourseDetails />} />

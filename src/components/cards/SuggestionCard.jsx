@@ -1,7 +1,7 @@
 
 export default function SuggestionCard(props) {
   return (
-    <div className="relative aspect-video max-w-sm rounded-lg">
+    <div className="relative aspect-video rounded-lg">
       <img
         src={props.photo}
         alt="Topic Photo"

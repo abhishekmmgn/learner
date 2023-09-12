@@ -2,10 +2,14 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      default:
+        "-apple-system, BlinkMacSystemFont,Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+    },
     colors: {
       transparent: "transparent",
-      "background-light-primary": "#F2F2F7",
-      // "background-light-secondary:": "#FFFFFF",
+      "background-light-primary": "#fafafa",
+      "background-light-secondary:": "#FFFFFF",
       "background-light-tertiary": "#E5E5E5",
 
       "red-light": "#FF3B30",
@@ -32,7 +36,6 @@ export default {
       black: "#000000",
       "black-secondary": "#1A1A1A",
       "black-tertiary": "#3C3C43",
-
 
       white: "#FFFFFF",
       "white-secondary": "#EBEBF5",

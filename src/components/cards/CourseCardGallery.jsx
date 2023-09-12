@@ -5,9 +5,9 @@ import { GoChevronRight } from "react-icons/go";
 function CourseCardGallery(props) {
   const photo = "https://picsum.photos/340/132";
   return (
-    <div className="w-full bg-transparent">
+    <div className="w-full bg-ztransparent">
       <div className="mb-3 flex items-center">
-        <h1 className="max-w-[332px] text-2xl font-semibold max-h-10 md:max-h-12 overflow-hidden md:text-3xl xl:text-4xl lg:max-w-[80%]">
+        <h1 className="max-w-[332px] text-2xl font-bold max-h-10 md:max-h-12 overflow-hidden md:text-3xl xl:text-4xl lg:max-w-[80%]">
           {props.title}
         </h1>
         <GoChevronRight className="mt-1 text-black text-2xl md:text-3xl lg:text-4xl" />

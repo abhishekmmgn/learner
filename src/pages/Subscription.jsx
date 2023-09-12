@@ -1,6 +1,6 @@
 export default function Subscription() {
   return (
-    <div className="flex flex-col items-center justify-center px-4 h-full w-full">
+    <div className="flex flex-col items-center justify-center px-4 md:px-8 h-full w-full">
       <p className="text-center font-medium text-black-secondary text-base md:text-base+ dark:text-white-secondary">
         Learner <span className="text-pink-light dark:text-pink-dark">Pro</span>
       </p>

@@ -15,16 +15,13 @@ export default function CourseCard(props) {
         </h1>
 
         <p className="text-ellipsis overflow-hidden text-gray-700 block text-sm text-black-tertiary md:text-sm+ lg:text-base dark:text-white-tertiary">
-          <span className="font-medium">Students: </span>
-          {props.students}
+          Students: {props.students}
         </p>
         <p className="h-6 text-ellipsis overflow-clip text-gray-700 block text-sm text-black-tertiary md:text-sm+ lg:text-base dark:text-white-tertiary">
-          <span className="font-medium">Instructors: </span>
-          {props.instructors}
+          Instructors: {props.instructors}
         </p>
         <p className="h-6 text-ellipsis overflow-clip text-gray-700 block text-sm text-black-tertiary md:text-sm+ lg:text-base dark:text-white-tertiary">
-          <span className="font-medium">Topics: </span>
-          {props.topics}
+          Topics: {props.topics}
         </p>
       </div>
     </div>

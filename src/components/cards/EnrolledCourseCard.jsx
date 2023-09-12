@@ -1,6 +1,6 @@
 export default function EnrolledCourseCard(props) {
   return (
-    <div className='border border-gray-light-600 w-[calc(100%-24px)] max-w-[372px] flex flex-col bg-white rounded-md hover:bg-gray-light-700 dark:border-gray-dark-600 dark:bg-background-dark-secondary dark:hover:bg-background-dark-secondary/70'>
+    <div className='border border-gray-light-600 w-[calc(100%-24px)] max-w-[372px] flex flex-col bg-white rounded-md'>
       <img
         src={props.photo}
         alt="Course Photo"
