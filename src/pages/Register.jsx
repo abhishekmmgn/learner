@@ -17,7 +17,7 @@ export default function Register() {
         Create Account
       </h1>
       <div className="flex flex-col items-center space-y-3 w-full">
-        <form className="w-full flex flex-col items-center space-y-4">
+        <form className="w-full flex flex-col items-center gap-4">
           <input
             type="email"
             placeholder="Email"
@@ -32,7 +32,7 @@ export default function Register() {
             onChange={handleChange}
             className={`w-full max-w-sm border-b border-gray-light-400 bg-transparent h-12 px-2 py-[0.25rem] text-base font-normal leading-[1.6] text-black placeholder-gray-light-100 outline-none transition duration-200 focus:outline-none sm:h-14 sm:px-4 sm:text-base+ md:text-lg dark:text-white dark:border-gray-dark-400 dark:placeholder-gray-dark-200`}
           />
-          <button className="btn mx-auto" onClick={handleSubmit}>
+          <button className="mt-1 btn mx-auto" onClick={handleSubmit}>
             Create Account
           </button>
         </form>

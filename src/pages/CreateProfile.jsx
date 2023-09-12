@@ -18,7 +18,7 @@ export default function CreateProfile() {
         <img
           src={formData.photo}
           alt="Profile Photo"
-          className="mb-2 bg-gray-light-600 h-28 w-28 rounded-full md:h-32 md:w-32 dark:bg-gray-dark-600"
+          className="mb-2 bg-gray-light-600 h-28 w-28 rounded-full md:h-32 md:w-32 dark:bg-gray-dark-700"
         />
       <form className="w-full flex flex-col items-center space-y-4">
         <input
@@ -35,7 +35,7 @@ export default function CreateProfile() {
           onChange={handleChange}
           className={`mb-3 w-full max-w-sm border-b border-gray-light-400 bg-transparent h-12 px-2 py-[0.25rem] text-base font-normal leading-[1.6] text-black placeholder-gray-light-100 outline-none transition duration-200 focus:outline-none sm:h-14 sm:px-4 sm:text-base+ md:text-lg dark:text-white dark:border-gray-dark-400 dark:placeholder-gray-dark-200`}
         />
-        <button className="btn mx-auto" onClick={handleSubmit}>
+        <button className="mt-1 btn mx-auto" onClick={handleSubmit}>
           Done
         </button>
       </form>

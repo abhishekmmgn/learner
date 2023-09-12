@@ -2,7 +2,7 @@ import CourseCardGallery from "../components/cards/CourseCardGallery";
 import { Link } from "react-router-dom";
 
 export default function Library(props) {
-  const hasCourses = false;
+  const hasCourses = true;
 
   return (
     <div className="h-full">

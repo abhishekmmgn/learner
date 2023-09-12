@@ -10,15 +10,15 @@ export default function CourseDetails(props) {
         <img
           src="https://source.unsplash.com/random"
           alt="Course Photo"
-          className="w-full aspect-video max-w-4xl bg-gray-light-600 md:ml-4 dark:bg-gray-dark-600"
+          className="w-full aspect-video max-w-4xl bg-gray-light-600 md:ml-8 md:mt-8 dark:bg-gray-dark-700"
         />
 
         {/* Title and description */}
-        <div className="px-4 mt-4 mb-8">
+        <div className="px-4 md:px-8 mt-4 mb-8">
           <h1 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
             Principles Of Discrete Applied Mathematics
           </h1>
-          <p className="text-base text-black-tertiary overflow-hidden max-h-20 sm:text-base+ md:text-lg md:mb-4 dark:text-white-tertiary">
+          <p className="mt-2 ext-base text-black-tertiary overflow-hidden max-h-20 sm:text-base+ md:text-lg md:mb-4 dark:text-white-tertiary">
             This course is an introduction to discrete applied mathematics.
             Topics include probability, counting, linear programming,
             number-theoretic algorithms, sorting, data compression, and
@@ -28,7 +28,7 @@ export default function CourseDetails(props) {
         </div>
 
         {/* Syllabus */}
-        <div className="px-4 space-y-6">
+        <div className="px-4 md:px-8 space-y-6">
           <div>
             <p className="mb-2 text-base+ md:text-lg lg:text-lg+">
               Syllabus
@@ -100,7 +100,7 @@ export default function CourseDetails(props) {
         </div>
       </>
 
-      <div className="w-full h-16 sticky bottom-0 left-0 right-0 px-4 py-2">
+      <div className="w-full h-20 sticky bottom-0 left-0 right-0 px-4 py-3">
         {enrolled ? (
           <button className="btn-text mx-auto">Unenroll</button>
         ) : (

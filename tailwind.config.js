@@ -41,8 +41,8 @@ export default {
       "white-secondary": "#EBEBF5",
       "white-tertiary": "#DFDEDF",
 
-      "background-dark-primary": "#101010",
-      "background-dark-secondary": "#1E1E1E",
+      "background-dark-primary": "#050505",
+      "background-dark-secondary": "#101010",
       "background-dark-tertiary": "#202020",
       "red-dark": "#FF453A",
       "orange-dark": "#FF9F0A",

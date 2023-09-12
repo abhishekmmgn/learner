@@ -4,7 +4,7 @@ export default function CourseCard(props) {
       <img
         src={props.photo}
         alt="Course Photo"
-        className="bg-gray-light-600 w-full object-cover aspect-video rounded-t-lg dark:bg-gray-dark-600"
+        className="bg-gray-light-600 w-full object-cover aspect-video rounded-t-lg dark:bg-gray-dark-700"
       />
       <div className="h-40 flex flex-col justify-center px-3 w-full  overflow-clip md:h-44">
         <p className="mb-1 text-pink-light text-xs md:text-xs+ lg:text-sm dark:text-pink-dark">
