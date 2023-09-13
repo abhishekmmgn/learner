@@ -2,37 +2,44 @@ import Back from "../components/Back";
 import { useState } from "react";
 
 export default function CourseDetails(props) {
-  const [enrolled, setEnrolled] = useState(true);
+  const [enrolled, setEnrolled] = useState(false);
   return (
     <div className="w-full h-full">
       <Back />
       <>
-        <img
-          src="https://source.unsplash.com/random"
-          alt="Course Photo"
-          className="w-full aspect-video max-w-4xl bg-gray-light-600 md:ml-8 md:mt-8 dark:bg-gray-dark-700"
-        />
+        <div className="md:mt-8 flex flex-col md:flex-row gap-5 justify-center items-center">
+          <img
+            src="https://source.unsplash.com/random"
+            alt="Course Photo"
+            className="w-full aspect-video bg-gray-light-600 md:ml-8 md:w-[360px] xl:w-[428px] dark:bg-gray-dark-700"
+          />
 
-        {/* Title and description */}
-        <div className="px-4 md:px-8 mt-4 mb-8">
-          <h1 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-            Principles Of Discrete Applied Mathematics
-          </h1>
-          <p className="mt-2 ext-base text-black-tertiary overflow-hidden max-h-20 sm:text-base+ md:text-lg md:mb-4 dark:text-white-tertiary">
-            This course is an introduction to discrete applied mathematics.
-            Topics include probability, counting, linear programming,
-            number-theoretic algorithms, sorting, data compression, and
-            error-correcting codes. This is a Communication Intensive in the
-            Major CI-M course, and thus includes a writing component
-          </p>
+          {/* Title and description */}
+          <div className="flex flex-col items-center justify-center md:items-start px-4 md:px-8 mb-8">
+            <h1 className="text-2xl font-semibold line-clamp-2 md:text-3xl lg:text-4xl">
+              Principles Of Discrete Applied Mathematics
+            </h1>
+            <p className="mt-2 mb-5 text-base text-black-tertiary line-clamp-5 md:line-clamp-[10] sm:text-base+ md:text-lg md:mb-4 dark:text-white-tertiary">
+              This course is an introduction to discrete applied mathematics.
+              Topics include probability, counting, linear programming,
+              number-theoretic algorithms, sorting, data compression, and
+              error-correcting codes. This is a Communication Intensive in the
+              Major CI-M course, and thus includes a writing component
+            </p>
+            <div className="w-full max-w-[164px]">
+              {enrolled ? (
+                <button className="btn-text mx-auto">Unenroll</button>
+              ) : (
+                <button className="btn-outline mx-auto">Enroll</button>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* Syllabus */}
         <div className="px-4 md:px-8 space-y-6">
+          {/* Syllabus */}
           <div>
-            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">
-              Syllabus
-            </p>
+            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">Syllabus</p>
             <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-gray-dark-800"></div>
           </div>
 
@@ -58,8 +65,8 @@ export default function CourseDetails(props) {
                 Topics
               </p>
               <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
-                Mathematics: Applied Mathematics, Discrete Mathematics, Probability
-                and Statistics, Social Science: Communication
+                Mathematics: Applied Mathematics, Discrete Mathematics,
+                Probability and Statistics, Social Science: Communication
               </p>
               <p className="text-black-secondary dark:text-white-secondary">
                 Teachers
@@ -79,9 +86,7 @@ export default function CourseDetails(props) {
 
           {/* Language */}
           <div>
-            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">
-              Languages
-            </p>
+            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">Languages</p>
             <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-gray-dark-800">
               <p className="text-black-secondary dark:text-white-secondary">
                 Audio
@@ -99,14 +104,6 @@ export default function CourseDetails(props) {
           </div>
         </div>
       </>
-
-      <div className="w-full h-20 sticky bottom-0 left-0 right-0 px-4 py-3">
-        {enrolled ? (
-          <button className="btn-text mx-auto">Unenroll</button>
-        ) : (
-          <button className="btn-outline mx-auto">Enroll</button>
-        )}
-      </div>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -9,6 +10,7 @@ export default function Login() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    navigate("/");
   };
 
   return (
@@ -21,6 +23,7 @@ export default function Login() {
           <input
             type="email"
             placeholder="Email"
+            name="email"
             value={formData.email}
             onChange={handleChange}
             className={`mb-3 w-full max-w-sm border-b border-gray-light-400 bg-transparent h-12 px-2 py-[0.25rem] text-base font-normal leading-[1.6] text-black placeholder-gray-light-100 outline-none transition duration-200 focus:outline-none sm:h-14 sm:px-4 sm:text-base+ md:text-lg dark:text-white dark:border-gray-dark-400 dark:placeholder-gray-dark-200`}
@@ -28,6 +31,7 @@ export default function Login() {
           <input
             type="password"
             placeholder="Password"
+            name="password"
             value={formData.password}
             onChange={handleChange}
             className={`w-full max-w-sm border-b border-gray-light-400 bg-transparent h-12 px-2 py-[0.25rem] text-base font-normal leading-[1.6] text-black placeholder-gray-light-100 outline-none transition duration-200 focus:outline-none sm:h-14 sm:px-4 sm:text-base+ md:text-lg dark:text-white dark:border-gray-dark-400 dark:placeholder-gray-dark-200`}

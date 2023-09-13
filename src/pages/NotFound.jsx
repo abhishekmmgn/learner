@@ -1,6 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function CreateProfile() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/")
+    }, 2000)
+  });
+
   return (
     <div className="flex flex-col gap-4 items-center justify-center px-4 md:px-8 h-full w-full md:gap-5">
       <div>
