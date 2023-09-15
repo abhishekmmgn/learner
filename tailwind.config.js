@@ -8,7 +8,7 @@ export default {
     },
     colors: {
       transparent: "transparent",
-      "background-light-primary": "#fafafa",
+      "background-light-primary": "#f5f5f5",
       "background-light-secondary:": "#FFFFFF",
       "background-light-tertiary": "#E5E5E5",
 

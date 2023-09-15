@@ -5,18 +5,18 @@ import SearchResultCard from "../components/cards/SearchResultCard";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 export default function Search() {
-  const isKeyboardOpen = useDetectKeyboardOpen() || true;
+  const isKeyboardOpen = useDetectKeyboardOpen() || false;
 
   return (
     <div>
       <SearchBar />
       {isKeyboardOpen ? (
-        <div className="px-4 md:px-8 mt-2 md:max-w-[720px] lg:max-w-[828px] md:mx-auto md:px-auto">
+        <div className="mt-14 px-4 md:px-8 md:max-w-[720px] lg:max-w-[828px] md:mx-auto md:px-auto">
           <SearchResultCard title="Learning react with practical knowledge" />
           <SearchResultCard title="Learning react with practical knowledge" />
         </div>
       ) : (
-        <div className="px-4 md:px-8 bg-transparent">
+        <div className="mt-16 px-4 md:px-8 bg-transparent">
           <h1 className="mb-3 text-2xl font-semibold md:text-3xl xl:text-4xl">Browse Topics</h1>
 
           <div className="w-full grid grid-cols-2 gap-3 overflow-y-scroll lg:grid-cols-3 xl:grid-cols-4 sm:gap-4 md:gap-5">

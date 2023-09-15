@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function TabBar() {
   return (
     <div
-      className={`px-4 border-b border-b-gray-light-400 bg-background-light-primary backdrop-filter backdrop-blur-xl bg-opacity-90 fixed z-50 inset-x-0 top-[52px] w-full h-10 pb-1 flex items-center md:hidden dark:border-b-gray-dark-600 dark:bg-background-dark-primary`}
+      className={`fixed px-4 border-b border-b-gray-light-400 bg-background-light-primary backdrop-filter backdrop-blur-xl bg-opacity-90 z-50 inset-x-0 bottom-0 w-full h-[52px] pb-1 flex items-center md:hidden dark:border-b-gray-dark-600 dark:bg-background-dark-primary`}
     >
       <div className="w-1/5 h-full flex items-center justify-center pb-1">
         <Link to="/" className="h-full w-[60%] flex items-center justify-center group">

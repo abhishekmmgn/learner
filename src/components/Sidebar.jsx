@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div className="z-40 hidden fixed top-0 bottom-0 h-full border-r bg-[#f0f0f0] backdrop-filter backdrop-blur-xl bg-opacity-90 border-r-gray-light-400 py-2 px-6 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col space-y-2 dark:border-r-gray-dark-600 dark:bg-background-dark-secondary">
+    <div className="z-50 hidden fixed top-0 bottom-0 h-full border-r bg-[#f0f0f0] backdrop-filter backdrop-blur-xl bg-opacity-90 border-r-gray-light-400 py-2 px-6 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col space-y-2 dark:border-r-gray-dark-600 dark:bg-background-dark-secondary">
         <h1 className="mt-2 h-11 text-xl font-medium w-full md:w-[180px] lg:w-[204px] xl:w-[232px] lg:text-2xl">
           Learner
         </h1>
