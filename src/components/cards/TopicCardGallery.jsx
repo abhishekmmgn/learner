@@ -8,7 +8,7 @@ export default function TopicCardGallery(props) {
         <h1 className="max-w-[332px] text-2xl font-semibold line-clamp-1 overflow-hidden md:text-3xl xl:text-4xl dark:text-white-tertiary/90">
           {props.title}
         </h1>
-        <GoChevronRight className="text-2xl text-black md:text-3xl lg:text-4xl" />
+        <GoChevronRight className="mt-1 text-2xl text-black md:text-3xl lg:text-4xl" />
       </div>
       <div className="h-full flex flex-row gap-4 overflow-visible overflow-x-scroll no-scrollbar">
         <TopicCard

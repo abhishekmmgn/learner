@@ -12,7 +12,7 @@ export default function SearchBar() {
     setIsFocused(true)
   }
   return (
-    <div className="fixed top-[52px] md:left-[210px] lg:left-[232px] xl:left-[248px] inset-0 h-14 z-20  flex items-center justify-center gap-3 md:h-16 bg-background-light-primary backdrop-filter backdrop-blur-xl bg-opacity-90 md:px-8 dark:bg-background-dark-primary">
+    <div className="fixed top-[52px] md:left-[210px] lg:left-[232px] xl:left-[248px] inset-0 h-14 z-20 flex items-center justify-center gap-3 md:h-16 bg-background-light-primary px-4 md:px-6 xl:px-8 dark:bg-background-dark-primary">
       <input
         type="search"
         placeholder="Courses, Topics and more"

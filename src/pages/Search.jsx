@@ -8,15 +8,15 @@ export default function Search() {
   const isKeyboardOpen = useDetectKeyboardOpen() || false;
 
   return (
-    <div>
+    <>
       <SearchBar />
       {isKeyboardOpen ? (
-        <div className="mt-14 px-4 md:px-8 md:max-w-[720px] lg:max-w-[828px] md:mx-auto md:px-auto">
+        <div className="px-4 md:px-6 xl:px-8 mt-[82px] md:mt-[90px] md:max-w-[720px] lg:max-w-[828px] md:mx-auto md:px-auto">
           <SearchResultCard title="Learning react with practical knowledge" />
           <SearchResultCard title="Learning react with practical knowledge" />
         </div>
       ) : (
-        <div className="mt-16 px-4 md:px-8 bg-transparent">
+        <div className="px-4 md:px-6 xl:px-8 mt-[82px] md:mt-[90px] bg-transparent">
           <h1 className="mb-3 text-2xl font-medium md:text-3xl xl:text-4xl dark:text-white-tertiary/90">Browse Topics</h1>
 
           <div className="w-full grid grid-cols-2 gap-3 overflow-y-scroll lg:grid-cols-3 xl:grid-cols-4 sm:gap-4">
@@ -111,6 +111,6 @@ export default function Search() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
