@@ -14,7 +14,7 @@ function CourseCardGallery(props) {
       </div>
 
       {props.enrolled ? (
-        <div className="h-full flex flex-row gap-5 overflow-visible overflow-x-scroll no-scrollbar">
+        <div className="h-full flex flex-row gap-4 overflow-visible overflow-x-scroll no-scrollbar">
           <EnrolledCourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"
@@ -41,7 +41,7 @@ function CourseCardGallery(props) {
           />
         </div>
       ) : (
-        <div className="h-full flex flex-row gap-5 overflow-visible overflow-x-scroll no-scrollbar">
+        <div className="h-full flex flex-row gap-4 overflow-visible overflow-x-scroll no-scrollbar">
           <CourseCard
             title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             level="Beginner"

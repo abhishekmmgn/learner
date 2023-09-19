@@ -9,7 +9,7 @@ export default function Layout() {
       <Header />
       <Sidebar />
       <main className="h-full w-full flex items-center 2xl:max-w-[1800px]">
-        <div className="w-full h-full mt-[56px] overflow-y-scroll md:pl-[210px] lg:pl-[232px] xl:pl-[248px]">
+        <div className="w-full h-full mt-[56px] overflow-y-scroll md:pl-[210px] lg:pl-[232px] xl:pl-[248px] no-scrollbar">
           <Outlet />
         </div>
       </main>
