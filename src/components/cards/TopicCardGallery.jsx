@@ -5,7 +5,7 @@ export default function TopicCardGallery(props) {
   return (
     <div className="mt-4 w-full bg-transparent">
       <div className="mb-3 flex items-center">
-        <h1 className="max-w-[332px] text-2xl font-medium line-clamp-1 overflow-hidden md:text-3xl xl:text-4xl dark:text-white-tertiary/90">
+        <h1 className="max-w-[332px] text-2xl font-semibold line-clamp-1 overflow-hidden md:text-3xl xl:text-4xl dark:text-white-tertiary/90">
           {props.title}
         </h1>
         <GoChevronRight className="text-2xl text-black md:text-3xl lg:text-4xl" />

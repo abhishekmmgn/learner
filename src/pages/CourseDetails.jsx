@@ -7,14 +7,14 @@ export default function CourseDetails(props) {
     <div className="w-full h-full">
       <Back />
       <>
-        <div className="md:my-8 flex flex-col md:flex-row h-min gap-5 items-stretch">
+        <div className="lg:my-8 flex flex-col lg:flex-row h-min gap-5 items-stretch">
           <img
             src="https://source.unsplash.com/random"
             alt="Course Photo"
-            className="w-full aspect-video bg-gray-light-500 md:ml-8 md:w-1/3 dark:bg-gray-dark-700"
+            className="w-full aspect-video bg-gray-light-500 lg:ml-8 lg:max-w-sm dark:bg-gray-dark-700"
           />
 
-          <div className="flex flex-col items-center justify-between md:items-start px-4 md:mr-8 mb-8 md:mb-0">
+          <div className="flex flex-col items-center justify-between lg:items-start px-4 lg:mr-8 md:px-8 mb-8 lg:mb-0 lg:w/2/3">
             <div>
               <h1 className="text-2xl font-semibold line-clamp-2 md:text-3xl lg:text-4xl dark:text-white-tertiary/90">
                 Principles Of Discrete Applied Mathematics

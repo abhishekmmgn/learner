@@ -1,6 +1,6 @@
 function TopicCard(props) {
   return (
-    <div className="relative border-gray-light-600 min-w-[calc(100%-24px)] max-w-[372px] aspect-video rounded-lg sm:min-w-[320px] dark:border-gray-dark-600">
+    <div className="relative border-gray-light-600 min-w-[calc(100%-24px)] max-w-[360px] aspect-video rounded-lg sm:min-w-[320px] dark:border-gray-dark-600">
       <img
         src={props.photo}
         alt="Topic Photo"
