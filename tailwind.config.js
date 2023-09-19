@@ -32,7 +32,7 @@ export default {
       "white-secondary": "#E0E0E0",
       "white-tertiary": "#DFDEDF",
 
-      "background-dark-primary": "#121212",
+      "background-dark-primary": "#111111",
       "background-dark-secondary": "#202020",
 
       "pink-dark": "#FF2D55",

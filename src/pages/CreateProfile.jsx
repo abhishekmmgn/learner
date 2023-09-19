@@ -14,13 +14,12 @@ export default function CreateProfile() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 px-4 h-full w-full sm:justify-center sm:gap-8 dark:bg-background-dark-secondary">
+    <div className="flex flex-col items-center justify-center gap-4 px-4 h-full w-full sm:justify-center sm:gap-8">
       <h1 className="w-full text-4xl font-semibold text-center md:text-5xl lg:text-6xl dark:text-white-tertiary/90">
         Create Profile
       </h1>
       <img
         src={formData.photo}
-        alt="Profile Photo"
         className="-mb-4 bg-gray-light-600 h-28 w-28 rounded-full md:h-32 md:w-32 dark:bg-gray-dark-700"
       />
       <form className="w-full flex flex-col items-center gap-4">

@@ -14,7 +14,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 px-4 h-full w-full sm:justify-center sm:space-y-8 dark:bg-black-secondary">
+    <div className="flex flex-col items-center justify-center space-y-4 px-4 h-full w-full sm:justify-center sm:space-y-8">
       <h1 className="w-full text-4xl font-semibold text-center md:text-5xl lg:text-6xl dark:text-white-tertiary/90">
         Login
       </h1>
