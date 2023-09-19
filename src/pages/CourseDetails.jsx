@@ -11,15 +11,15 @@ export default function CourseDetails(props) {
           <img
             src="https://source.unsplash.com/random"
             alt="Course Photo"
-            className="w-full aspect-video bg-gray-light-600 md:ml-8 md:w-1/3 dark:bg-gray-dark-700"
+            className="w-full aspect-video bg-gray-light-500 md:ml-8 md:w-1/3 dark:bg-gray-dark-700"
           />
 
           <div className="flex flex-col items-center justify-between md:items-start px-4 md:mr-8 mb-8 md:mb-0">
             <div>
-              <h1 className="text-2xl font-semibold line-clamp-2 md:text-3xl lg:text-4xl">
+              <h1 className="text-2xl font-semibold line-clamp-2 md:text-3xl lg:text-4xl dark:text-white-tertiary/90">
                 Principles Of Discrete Applied Mathematics
               </h1>
-              <p className="mt-2 mb-5 text-base text-black-tertiary line-clamp-5 md:line-clamp-[10] sm:text-base+ md:text-lg md:mb-4 dark:text-white-tertiary">
+              <p className="mt-2 mb-5 text-base text-black-tertiary line-clamp-5 md:line-clamp-[10] sm:text-base+ md:text-lg md:mb-4 dark:text-white-tertiary/70">
                 This course is an introduction to discrete applied mathematics.
                 Topics include probability, counting, linear programming,
                 number-theoretic algorithms, sorting, data compression, and
@@ -40,46 +40,46 @@ export default function CourseDetails(props) {
         <div className="px-4 md:px-8 space-y-6">
           {/* Syllabus */}
           <div>
-            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">Syllabus</p>
-            <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-gray-dark-800"></div>
+            <p className="mb-3 text-base+ md:text-lg lg:text-lg+">Syllabus</p>
+            <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-background-dark-secondary"></div>
           </div>
 
           {/* Information */}
           <div>
-            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">
+            <p className="mb-3 text-base+ md:text-lg lg:text-lg+">
               Information
             </p>
-            <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-gray-dark-800">
-              <p className="text-black-secondary dark:text-white-secondary">
+            <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-background-dark-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Level
               </p>
-              <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
+              <p className="mb-3 text-black-tertiary dark:text-white-tertiary/70">
                 Intermediate
               </p>
-              <p className="text-black-secondary dark:text-white-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Duration
               </p>
-              <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
+              <p className="mb-3 text-black-tertiary dark:text-white-tertiary/70">
                 2 months
               </p>
-              <p className="text-black-secondary dark:text-white-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Topics
               </p>
-              <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
+              <p className="mb-3 text-black-tertiary dark:text-white-tertiary/70">
                 Mathematics: Applied Mathematics, Discrete Mathematics,
                 Probability and Statistics, Social Science: Communication
               </p>
-              <p className="text-black-secondary dark:text-white-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Teachers
               </p>
-              <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
+              <p className="mb-3 text-black-tertiary dark:text-white-tertiary/70">
                 Prof. Michel Goemans, Susan Ruff, Dr. Lorenzo Orecchia, Dr.
                 Richard Peng
               </p>
-              <p className="text-black-secondary dark:text-white-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Students
               </p>
-              <p className="text-black-tertiary dark:text-white-tertiary">
+              <p className="text-black-tertiary dark:text-white-tertiary/70">
                 120K
               </p>
             </div>
@@ -87,18 +87,18 @@ export default function CourseDetails(props) {
 
           {/* Language */}
           <div>
-            <p className="mb-2 text-base+ md:text-lg lg:text-lg+">Languages</p>
-            <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-gray-dark-800">
-              <p className="text-black-secondary dark:text-white-secondary">
+            <p className="mb-3 text-base+ md:text-lg lg:text-lg+">Languages</p>
+            <div className="p-4 rounded-xl bg-gray-light-800 text-sm+ md:text-base lg:text-base+ dark:bg-background-dark-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Audio
               </p>
-              <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
+              <p className="mb-3 text-black-tertiary dark:text-white-tertiary/70">
                 English, Spanish, Hindi
               </p>
-              <p className="text-black-secondary dark:text-white-secondary">
+              <p className="text-black dark:text-white-tertiary/90">
                 Subtitles
               </p>
-              <p className="mb-2 text-black-tertiary dark:text-white-tertiary">
+              <p className="mb-3 text-black-tertiary dark:text-white-tertiary/70">
                 English, Hindi, Spanish, French, Korean Chinese, etc
               </p>
             </div>

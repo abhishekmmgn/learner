@@ -29,10 +29,10 @@ export default function Library(props) {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center px-4 md:px-8 h-full w-full">
-          <h1 className="text-center text-3xl font-semibold md:text-4xl xl:text-5xl">
+          <h1 className="text-center text-3xl font-semibold md:text-4xl xl:text-5xl dark:text-white-tertiary/90">
             You do not have any courses
           </h1>
-          <p className="text-center font-medium text-black-secondary mt-1 mb-6 text-base md:text-lg xl:text-lg+ dark:text-white-secondary">
+          <p className="text-center font-medium text-black-secondary mt-1 mb-6 text-base md:text-lg xl:text-lg+ dark:text-white-tertiary/70">
             Learn with your library across your devices.
           </p>
           <Link to="/" className="w-full">

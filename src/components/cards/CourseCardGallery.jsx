@@ -7,7 +7,7 @@ function CourseCardGallery(props) {
   return (
     <div className="w-full py-4">
       <div className="mb-3 flex items-center">
-        <h1 className="max-w-[332px] text-2xl font-bold line-clamp-1 md:text-3xl xl:text-4xl lg:max-w-[80%]">
+        <h1 className="max-w-[332px] text-2xl font-semibold line-clamp-1 md:text-3xl xl:text-4xl lg:max-w-[80%] dark:text-white-tertiary/90">
           {props.title}
         </h1>
         <GoChevronRight className="mt-1 text-black text-2xl md:text-3xl lg:text-4xl" />

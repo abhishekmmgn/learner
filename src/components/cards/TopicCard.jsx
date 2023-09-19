@@ -7,7 +7,7 @@ function TopicCard(props) {
         className="absolute top-0 inset-x-0 bg-gray-light-600 w-full object-cover aspect-video rounded-lg dark:bg-gray-dark-600"
       />
       <div className="absolute top-0 inset-x-0 bg-gradient-to-b from-transparent to-black/80 w-full object-cover aspect-video rounded-lg hover:bg-black/5"></div>
-      <p className="absolute bottom-3 left-3 text-white text-base+ md:text-lg xl:text-lg+ overflow-clip">
+      <p className="absolute bottom-3 left-3 text-white-tertiary/90 text-base+ md:text-lg xl:text-lg+ overflow-clip">
         {props.topic}
       </p>
     </div>
