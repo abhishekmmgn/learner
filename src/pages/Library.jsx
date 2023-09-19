@@ -7,7 +7,7 @@ export default function Library(props) {
   return (
     <div className="h-full">
       {hasCourses ? (
-        <div className="pl-4 md:pl-6 xl:pl-8 py-4 md:py-6 xl:py-8">
+        <div className="pl-4 md:pl-6 xl:pl-8 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 space-y-6 sm:space-y-8 xl:space-y-10 ">
           <CourseCardGallery
             enrolled={true}
             title="Currently Learning"
