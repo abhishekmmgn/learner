@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./layouts/Layout";
+import LayoutOne from "./layouts/LayoutOne";
 import Library from "./pages/Library";
 import Search from "./pages/Search";
 import Home from "./pages/Home";
@@ -21,7 +21,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/auth" element={<Auth />} />
 
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<LayoutOne />}>
           <Route index element={<Home />} />
           <Route path="course/:id" element={<CourseDetails />} />
           <Route path="/library" element={<Library />} />

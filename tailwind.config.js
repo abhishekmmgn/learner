@@ -1,70 +1,76 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  darkMode: ["class"],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
   theme: {
-    fontFamily: {
-      default:
-        "-apple-system, BlinkMacSystemFont,Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-    },
-    colors: {
-      transparent: "transparent",
-      "background-light-primary": "#f5f5f5",
-      "background-light-secondary": "#E5E5E5",
-
-      "pink-light": "#FF2D55",
-
-      "gray-light": {
-        100: "#8E8E93",
-        200: "#AEAEB2",
-        300: "#C7C7CC",
-        400: "#D1D1D6",
-        500: "#E5E5EA",
-        600: "#F2F2F7",
-        700: "#F8F8FA",
-        800: "#FCFCFD",
-      },
-
-      black: "#000000",
-      "black-secondary": "#1A1A1A",
-      "black-tertiary": "#3C3C43",
-
-      white: "#FFFFFF",
-      "white-secondary": "#E0E0E0",
-      "white-tertiary": "#DFDEDF",
-
-      "background-dark-primary": "#111111",
-      "background-dark-secondary": "#202020",
-
-      "pink-dark": "#FF2D55",
-
-      "gray-dark": {
-        100: "#8E8E93",
-        200: "#767679",
-        300: "#636366",
-        400: "#48484A",
-        500: "#3A3A3C",
-        600: "#2C2C2E",
-        700: "#1C1C1E",
-        800: "#0E0E0E",
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
       },
     },
-    fontSize: {
-      xs: "0.75rem",
-      "xs+": "0.8125rem",
-      sm: "0.875rem",
-      "sm+": "0.9375rem",
-      base: "1rem",
-      "base+": "1.0625rem",
-      lg: "1.125rem",
-      "lg+": "1.1875rem",
-      xl: "1.3125rem",
-      "2xl": "1.5rem",
-      "3xl": "1.75rem",
-      "4xl": "2rem",
-      "5xl": "2.25rem",
-      "6xl": "2.5rem",
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
-    extend: {},
   },
-  plugins: [],
-};
+  plugins: [require("tailwindcss-animate")],
+}
