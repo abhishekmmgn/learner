@@ -7,10 +7,12 @@ import SearchResults from "./pages/SearchResults";
 import Subscription from "./pages/Subscription";
 import CourseDetails from "./pages/CourseDetails";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Auth from "./pages/Auth";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Auth from "./pages/auth/Auth";
 import CreateProfile from "./pages/CreateProfile";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route path="/" element={<LayoutOne />}>
           <Route index element={<Home />} />
