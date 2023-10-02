@@ -2,11 +2,11 @@ import { Progress } from "../ui/progress"
 
 export default function EnrolledCourseCard(props) {
   return (
-    <div className='border w-[calc(100%-32px)] max-w-[372px] flex flex-col bg-white rounded-lg'>
+    <div className='border w-[calc(100%-32px)] max-w-[372px] flex flex-col bg-background rounded-lg'>
       <img
         src={props.photo}
         alt="Course Photo"
-        className="bg-white w-full object-cover aspect-video rounded-t-lg"
+        className="bg-background w-full object-cover aspect-video rounded-t-lg"
       />
       <div className="h-32 flex flex-col justify-center px-3 w-full overflow-clip md:h-36">
         <p className="mb-1 text-primary line-clamp-1 text-sm lg:text-base">{props.level}</p>

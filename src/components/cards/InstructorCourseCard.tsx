@@ -7,11 +7,11 @@ import {
 
 export default function InstructorCourseCard(props) {
   return (
-    <div className="border w-full max-w-md flex flex-col bg-white rounded-lg">
+    <div className="border w-full max-w-md flex flex-col bg-background rounded-lg">
       <img
         src={props.photo}
         alt="Course Photo"
-        className="bg-white w-full object-cover aspect-video rounded-t-lg"
+        className="bg-background w-full object-cover aspect-video rounded-t-lg"
       />
       <div className="h-20 p-3 flex items-start justify-between">
         <h1 className="font-medium line-clamp-2 w-[90%]">{props.title}</h1>

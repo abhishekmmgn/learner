@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
-  const isInstructor = true;
+  const isInstructor = false;
   return (
-    <div className="z-50 hidden fixed inset-y-0 h-full border-r bg-[#f0f0f0] backdrop-filter backdrop-blur-xl bg-opacity-90 py-2 px-4 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col gap-2 lg:px-5 xl:px-6">
+    <div className="z-50 hidden fixed inset-y-0 h-full border-r bg-background backdrop-filter backdrop-blur-xl bg-opacity-90 py-2 px-4 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col gap-2 lg:px-5 xl:px-6">
       <h1 className="mt-2 h-11 text-xl pl-2 pt-1 lg:pt-0 font-medium w-full">
         Learner
       </h1>
@@ -12,7 +12,7 @@ export default function Sidebar() {
         <>
           <Link
             to="/"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ export default function Sidebar() {
 
           <Link
             to="/new"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ export default function Sidebar() {
 
           <Link
             to="/settings"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export default function Sidebar() {
         <>
           <Link
             to="/"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ export default function Sidebar() {
 
           <Link
             to="/library"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +127,7 @@ export default function Sidebar() {
 
           <Link
             to="/search"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ export default function Sidebar() {
 
           <Link
             to="/settings"
-            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
+            className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-secondary hover:text-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

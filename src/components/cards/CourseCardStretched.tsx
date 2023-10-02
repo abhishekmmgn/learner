@@ -1,6 +1,6 @@
 export default function CourseCardStretched(props) {
   return (
-    <div className="border w-full flex bg-white rounded-lg">
+    <div className="border w-full flex bg-background rounded-lg">
       <img
         src={props.photo}
         alt="Course Photo"

@@ -62,7 +62,7 @@ export default function CreateCourseForm() {
             <img
               src={values.image}
               alt="Cover Image"
-              className="w-full aspect-video bg-white"
+              className="w-full aspect-video bg-background"
             />
             <Input
               id="image"

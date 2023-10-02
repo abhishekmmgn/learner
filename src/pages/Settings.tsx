@@ -13,8 +13,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
+import { useTheme } from "../components/theme-provider";
 
 export default function Settings() {
+  const { setTheme } = useTheme();
+
   const isInstructor = true;
   return (
     <div className="p-4 md:px-6 xl:px-8 py-6 sm:py-8 md:pt-12 md:pb-0 flex flex-col items-center">
@@ -70,6 +79,33 @@ export default function Settings() {
                 <p>Delete Account</p>
                 <Button variant="secondary">Delete Account</Button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p className="mb-2 text-sm md:text-base font-medium text-primary">
+            Appearance
+          </p>
+          <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
+            <div className="flex items-center justify-between">
+              <Label htmlFor="notifications-preferences" className="text-base">
+                Theme
+              </Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="text-primary text-sm">Change Theme</DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => setTheme("light")}>
+                    Light
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("dark")}>
+                    Dark
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("system")}>
+                    System
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>

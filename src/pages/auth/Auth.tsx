@@ -7,7 +7,7 @@ export default function Auth() {
     <>
       <div className="container relative h-screen mt-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 md:mt-0">
         <AuthLeftPane />
-        <div className="mx-auto flex w-full flex-col justify-center space-y-8 sm:w-[350px]">
+        <div className="mx-auto flex w-full text-center flex-col justify-center space-y-8 sm:w-[350px]">
           <h1 className="text-2xl font-semibold tracking-tight">
             Continue with Authentication
           </h1>
