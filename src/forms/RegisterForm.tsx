@@ -3,6 +3,7 @@ import { Button, buttonVariants } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Link } from "react-router-dom";
+import { Switch } from "@/components/ui/switch";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -12,17 +13,30 @@ const onSubmit = async (values, actions) => {
   actions.resetForm();
 };
 
+const passwordRules: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
 const initialValues = {
   email: "",
   password: "",
+  confirmPassword: "",
+  isInstructor: false,
 };
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Please enter a valid email").required("Required"),
-  password: Yup.string().min(8),
+  password: Yup.string()
+    .min(8)
+    .matches(passwordRules, {
+      message: "Please create a stronger password",
+    })
+    .required("Required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Required"),
+  isInstructor: Yup.boolean().default(true).optional(),
 });
 
-export default function LoginForm() {
+export default function RegistrationForm() {
   const {
     values,
     errors,
@@ -72,6 +86,30 @@ export default function LoginForm() {
               disabled={isSubmitting}
             />
           </div>
+          <div className="grid gap-1">
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm your password"
+              value={values.confirmPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              autoCapitalize="none"
+              autoComplete="password"
+              autoCorrect="off"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div className="flex items-center justify-between my-1">
+            <Label htmlFor="isInstructor">Instructor Account</Label>
+            <Switch
+              id="isInstructor"
+              checked={values.isInstructor}
+              onCheckedChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting && (
@@ -90,30 +128,22 @@ export default function LoginForm() {
                 />
               </svg>
             )}
-            Sign In
+            Sign Up
           </Button>
         </div>
       </form>
-      <div className="-mt-4 space-y-2">
       <Link
-        to="/forgot-password"
-        className={cn(buttonVariants({ variant: "ghost" }))}
-        >
-        Forgot Password
+        to="/login"
+        className={cn(buttonVariants({ variant: "ghost" }), "-mt-4")}
+      >
+        Login
       </Link>
-      <Link
-        to="/register"
-        className={cn(buttonVariants({ variant: "secondary" }))}
-        >
-        Create Account
-      </Link>
-        </div>
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-tertiary px-2 text-muted-foreground">
             Or continue with
           </span>
         </div>
