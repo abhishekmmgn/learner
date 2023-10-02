@@ -16,10 +16,10 @@ export default function CourseDetails(props) {
 
         <div className="flex flex-col items-center justify-between lg:items-start px-4 lg:mr-8 md:px-8 mb-8 lg:mb-0 lg:w/2/3">
           <div>
-            <h1 className="text-2xl font-semibold line-clamp-2 md:text-3xl">
+            <h1 className="text-xl font-semibold line-clamp-2 md:text-2xl">
               Principles Of Discrete Applied Mathematics
             </h1>
-            <p className="mt-2 mb-5 text-base text-tertiary-foreground line-clamp-5 md:line-clamp-[10] md:text-lg md:mb-4">
+            <p className="mt-2 mb-5 text-tertiary-foreground line-clamp-5 md:line-clamp-[10] lg:text-lg md:mb-4">
               This course is an introduction to discrete applied mathematics.
               Topics include probability, counting, linear programming,
               number-theoretic algorithms, sorting, data compression, and
@@ -57,7 +57,7 @@ export default function CourseDetails(props) {
               Mathematics: Applied Mathematics, Discrete Mathematics,
               Probability and Statistics, Social Science: Communication
             </p>
-            <p>Teachers</p>
+            <p>Instructor</p>
             <p className="mb-3 text-tertiary-foreground">
               Prof. Michel Goemans, Susan Ruff, Dr. Lorenzo Orecchia, Dr.
               Richard Peng

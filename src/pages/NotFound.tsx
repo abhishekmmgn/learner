@@ -1,6 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Button } from "../components/ui/button";
 
 export default function CreateProfile() {
   const navigate = useNavigate();
@@ -21,9 +20,6 @@ export default function CreateProfile() {
           Nothing here.
         </p>
       </div>
-      <Link to="/" className="w-full max-w-md sm:max-w-sm">
-        <Button className="btn-outline mx-auto">Go to Homepage</Button>
-      </Link>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import RegistrationForm from "../../forms/login-form";
+import RegistrationForm from "../../forms/LoginForm";
 import { Link } from "react-router-dom";
 import AuthLeftPane from "../../components/AuthLeftPane";
 

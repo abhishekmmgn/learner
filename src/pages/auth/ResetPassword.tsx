@@ -1,4 +1,4 @@
-import ResetPasswordForm from "../../forms/reset-password-form";
+import ResetPasswordForm from "../../forms/ResetPasswordForm";
 import AuthLeftPane from "../../components/AuthLeftPane";
 
 export default function ResetPassword() {
