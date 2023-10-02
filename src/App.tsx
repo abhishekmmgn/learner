@@ -4,6 +4,7 @@ import LayoutThree from "./layouts/LayoutThree";
 import Library from "./pages/Library";
 import Search from "./pages/Search";
 import Home from "./pages/Home";
+import Settings from "./pages/Settings";
 import SearchResults from "./pages/SearchResults";
 import CourseDetails from "./pages/CourseDetails";
 import NotFound from "./pages/NotFound";
@@ -30,6 +31,7 @@ export default function App() {
         </Route>
         <Route path="/" element={<LayoutOne />}>
           <Route index element={<Home />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/library" element={<Library />} />
           <Route path="/search">
             <Route index element={<Search />} />

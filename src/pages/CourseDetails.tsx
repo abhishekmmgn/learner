@@ -41,13 +41,13 @@ export default function CourseDetails(props) {
         {/* Syllabus */}
         <div>
           <p className="mb-3 md:text-lg font-medium">Syllabus</p>
-          <div className="p-4 rounded-xl bg-background text-sm+ md:text-base lg:text-base+"></div>
+          <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+"></div>
         </div>
 
         {/* Information */}
         <div>
           <p className="mb-3 md:text-lg font-medium">Information</p>
-          <div className="p-4 rounded-xl bg-background text-sm+ md:text-base lg:text-base+">
+          <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+">
             <p>Level</p>
             <p className="mb-3 text-tertiary-foreground">Intermediate</p>
             <p>Duration</p>
@@ -70,7 +70,7 @@ export default function CourseDetails(props) {
         {/* Language */}
         <div>
           <p className="mb-3 md:text-lg font-medium">Languages</p>
-          <div className="p-4 rounded-xl bg-background text-sm+ md:text-base lg:text-base+">
+          <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+">
             <p>Audio</p>
             <p className="mb-3 text-tertiary-foreground">
               English, Spanish, Hindi

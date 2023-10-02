@@ -1,11 +1,16 @@
-function TableRowLeft(props) {
+type PropsType = {
+  image?: {image: string, alt: string};
+  title: string;
+}
+
+function TableRow(props: PropsType) {
   return (
     <div className="border-b-2 bg-white px-4 h-11 w-full flex items-center justify-between hover:bg-secondary">
       <div className='flex gap-2 items-center'>
         {props.image && (
           <img
-            src={props.image}
-            alt={`${props.name} icon`}
+            src={props.image.image}
+            alt={`${props.image.alt} icon`}
             className="h-5 w-5"
           />
         )}
@@ -17,4 +22,4 @@ function TableRowLeft(props) {
   )
 }
   
-export default TableRowLeft;
+export default TableRow;
