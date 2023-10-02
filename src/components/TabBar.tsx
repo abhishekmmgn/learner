@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export default function TabBar() {
   return (
     <div
-      className={`fixed px-4 border-t border-t-gray-light-400 bg-background-light-primary backdrop-filter backdrop-blur-xl bg-opacity-90 z-50 inset-x-0 bottom-0 w-full h-[52px] pb-1 flex items-center md:hidden dark:border-t-gray-dark-600 dark:bg-background-dark-primary`}
+      className={`fixed px-4 border-t bg-tertiary backdrop-filter backdrop-blur-xl bg-opacity-90 z-50 inset-x-0 bottom-0 w-full h-[52px] pb-1 flex items-center md:hidden`}
     >
-      <div className="w-1/4 h-full flex items-center justify-center pb-1">
+      <div className="w-1/4 h-full flex items-center justify-center">
         <Link
           to="/"
           className="h-full w-[60%] flex items-center justify-center group"
@@ -16,7 +16,7 @@ export default function TabBar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-6 h-6 group-hover:text-primary"
           >
             <path
               strokeLinecap="round"
@@ -27,7 +27,7 @@ export default function TabBar() {
         </Link>
       </div>
 
-      <div className="w-1/4 h-full flex items-center justify-center pb-1">
+      <div className="w-1/4 h-full flex items-center justify-center">
         <Link
           to="/library"
           className="h-full w-[60%] flex items-center justify-center group"
@@ -38,7 +38,7 @@ export default function TabBar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-6 h-6 group-hover:text-primary"
           >
             <path
               strokeLinecap="round"
@@ -49,7 +49,7 @@ export default function TabBar() {
         </Link>
       </div>
 
-      <div className="w-1/4 h-full flex items-center justify-center pb-1">
+      <div className="w-1/4 h-full flex items-center justify-center">
         <Link
           to="/search"
           className="h-full w-[60%] flex items-center justify-center group"
@@ -60,7 +60,7 @@ export default function TabBar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 2xl:text-base+ text-black-tertiary dark:text-white-tertiary/60"
+            className="w-6 h-6 group-hover:text-primary"
           >
             <path
               strokeLinecap="round"
@@ -73,7 +73,7 @@ export default function TabBar() {
 
       <div className="w-1/4 h-full flex items-center justify-center pb-1">
         <Link
-          to="/settings"
+          to="/account"
           className="h-full w-[60%] flex items-center justify-center group"
         >
           <svg
@@ -82,7 +82,7 @@ export default function TabBar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 text-2xl text-black-tertiary group-hover:text-pink-light dark:text-gray-dark-100 dark:group-hover:text-pink-dark"
+            className="w-6 h-6 group-hover:text-primary"
           >
             <path
               strokeLinecap="round"

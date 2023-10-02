@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div className="z-50 hidden fixed top-0 bottom-0 h-full border-r bg-[#f0f0f0] backdrop-filter backdrop-blur-xl bg-opacity-90 border-r-gray-light-400 py-2 px-6 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col space-y-2 dark:border-r-gray-dark-600 dark:bg-black-secondary">
-      <h1 className="mt-2 h-11 text-xl pl-2 pt-1 lg:pt-0 font-medium w-full md:w-[180px] lg:w-[204px] xl:w-[232px] lg:text-2xl dark:text-white-secondary/90">
+    <div className="z-50 hidden fixed inset-y-0 h-full border-r bg-[#f0f0f0] backdrop-filter backdrop-blur-xl bg-opacity-90 py-2 px-4 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col gap-2 lg:px-5 xl:px-6">
+      <h1 className="mt-2 h-11 text-xl pl-2 pt-1 lg:pt-0 font-medium w-full">
         Learner
       </h1>
       <Link
         to="/"
-        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-gray-light-500 dark:hover:bg-gray-dark-600"
+        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ export default function Sidebar() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-5 h-5"
         >
           <path
             strokeLinecap="round"
@@ -24,15 +24,12 @@ export default function Sidebar() {
             d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
           />
         </svg>
-
-        <p className="2xl:text-base+ text-black-tertiary dark:text-white-tertiary/60">
-          Explore
-        </p>
+        <p className="text-black-tertiary">Explore</p>
       </Link>
 
       <Link
         to="/library"
-        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-gray-light-500 dark:hover:bg-gray-dark-600"
+        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +37,7 @@ export default function Sidebar() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-5 h-5"
         >
           <path
             strokeLinecap="round"
@@ -49,14 +46,12 @@ export default function Sidebar() {
           />
         </svg>
 
-        <p className="2xl:text-base+ text-black-tertiary dark:text-white-tertiary/60">
-          Library
-        </p>
+        <p className="text-black-tertiary">Library</p>
       </Link>
 
       <Link
         to="/search"
-        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-gray-light-500 dark:hover:bg-gray-dark-600"
+        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +59,7 @@ export default function Sidebar() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 2xl:text-base+ text-black-tertiary dark:text-white-tertiary/60"
+          className="w-5 h-5 text-black-tertiary "
         >
           <path
             strokeLinecap="round"
@@ -72,14 +67,12 @@ export default function Sidebar() {
             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
           />
         </svg>
-        <p className="2xl:text-base+ text-black-tertiary dark:text-white-tertiary/60">
-          Search
-        </p>
+        <p className="text-black-tertiary">Search</p>
       </Link>
 
       <Link
-        to="/settings"
-        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-gray-light-500 dark:hover:bg-gray-dark-600"
+        to="/account"
+        className="pl-3 rounded-lg h-9 w-full flex flex-row items-center justify-start gap-2 group hover:bg-[#e5e5e5] hover:text-primary"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +80,7 @@ export default function Sidebar() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-5 h-5"
         >
           <path
             strokeLinecap="round"
@@ -96,9 +89,7 @@ export default function Sidebar() {
           />
         </svg>
 
-        <p className="2xl:text-base+ text-black-tertiary dark:text-white-tertiary/60">
-          Settings
-        </p>
+        <p className="text-black-tertiary">Account</p>
       </Link>
     </div>
   );

@@ -2,9 +2,9 @@ import TopicCard from "./TopicCard";
 
 export default function TopicCardGallery(props) {
   return (
-    <div className="w-full bg-transparent">
-      <div className="mb-3 flex items-center">
-        <h1 className="max-w-[332px] text-2xl font-semibold line-clamp-1 overflow-hidden md:text-base lg:text-xl dark:text-white-tertiary/90">
+    <div className="w-full">
+    <div className="mb-3 flex items-center">
+        <h1 className="max-w-[332px] text-xl font-semibold line-clamp-1 lg:text-xl lg:max-w-[80%]">
           {props.title}
         </h1>
         <svg
@@ -13,7 +13,7 @@ export default function TopicCardGallery(props) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 mt-1 text-2xl text-black md:text-3xl lg:text-4xl sm:hidden"
+          className="w-5 h-5 sm:hidden"
         >
           <path
             strokeLinecap="round"

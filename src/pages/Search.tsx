@@ -17,7 +17,7 @@ export default function Search() {
         </div>
       ) : (
         <div className="px-4 md:px-6 xl:px-8 mt-[82px] md:mt-[90px] bg-transparent">
-          <h1 className="mb-3 text-2xl font-medium  md:text-base lg:text-xl dark:text-white-tertiary/90">Browse Topics</h1>
+          <h1 className="mb-3 text-xl font-semibold">Browse Topics</h1>
 
           <div className="w-full grid grid-cols-2 gap-3 overflow-y-scroll lg:grid-cols-3 xl:grid-cols-4 sm:gap-4 no-scrollbar">
             <SuggestionCard

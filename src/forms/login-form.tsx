@@ -96,16 +96,16 @@ export default function LoginForm() {
       </form>
       <div className="-mt-4 space-y-2">
       <Link
-        to="/register"
-        className={cn(buttonVariants({ variant: "secondary" }))}
-        >
-        Create Account
-      </Link>
-      <Link
         to="/forgot-password"
         className={cn(buttonVariants({ variant: "ghost" }))}
         >
         Forgot Password
+      </Link>
+      <Link
+        to="/register"
+        className={cn(buttonVariants({ variant: "secondary" }))}
+        >
+        Create Account
       </Link>
         </div>
       <div className="relative">

@@ -2,7 +2,7 @@ import appIcon from "/appIcon.png";
 
 export default function AuthLeftPane() {
   return (
-    <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+    <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex">
       <div className="absolute inset-0 bg-zinc-900" />
       <div className="relative z-20 text-lg font-medium">
         <img src={appIcon} alt="App appIcon" className="w-28" />
