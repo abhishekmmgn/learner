@@ -1,11 +1,12 @@
 import RegistrationForm from "../../forms/LoginForm";
 import { Link } from "react-router-dom";
+import { buttonVariants } from "../../components/ui/button";
 import AuthLeftPane from "../../components/AuthLeftPane";
 
 export default function LoginPage() {
   return (
     <>
-      <div className="container relative h-screen mt-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 md:mt-0">
+      <div className="container relative bg-background h-screen pt-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 md:pt-0">
         <AuthLeftPane />
         <div className="mx-auto flex w-full flex-col justify-center space-y-8 sm:w-[350px]">
           <div className="flex flex-col space-y-1 text-center">
@@ -14,7 +15,21 @@ export default function LoginPage() {
               Enter your email below to sign in to your account
             </p>
           </div>
-          <RegistrationForm />
+          <div className="space-y-3">
+            <RegistrationForm />
+            <Link
+              to="/forgot-password"
+              className={buttonVariants({ variant: "ghost" })}
+            >
+              Forgot Password
+            </Link>
+            <Link
+              to="/register"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              Create Account
+            </Link>
+          </div>
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{" "}
             <Link

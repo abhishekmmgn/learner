@@ -77,7 +77,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="title">Title</Label>
             <Textarea
               id="title"
@@ -91,7 +91,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="description">Description</Label>
             <Textarea
               id="description"
@@ -105,7 +105,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="level">Level</Label>
             <Input
               id="level"
@@ -120,7 +120,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="level">Level</Label>
             <Input
               id="level"
@@ -135,7 +135,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="duration">Duration</Label>
             <Input
               id="duration"
@@ -150,7 +150,7 @@ export default function CreateCourseForm() {
               }`}bg-red-300 
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="topic">Topic</Label>
             <Input
               id="topic"
@@ -165,7 +165,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="audio">Audio</Label>
             <Input
               id="audio"
@@ -180,7 +180,7 @@ export default function CreateCourseForm() {
               }`}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <Label htmlFor="subtitles">Subtitles</Label>
             <Input
               id="subtitles"

@@ -14,6 +14,15 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "../components/ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -24,14 +33,14 @@ import { useTheme } from "../components/theme-provider";
 export default function Settings() {
   const { setTheme } = useTheme();
 
-  const isInstructor = true;
+  const isInstructor = false;
   return (
     <div className="p-4 md:px-6 xl:px-8 py-6 sm:py-8 md:pt-12 md:pb-0 flex flex-col items-center">
       <div className="w-full md:max-w-2xl xl:mr-[248px] space-y-4">
         <div className="flex gap-3 items-center bg-background p-4 rounded-lg">
           <div>
             <Avatar className="w-16 h-16">
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src="" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>
@@ -47,12 +56,9 @@ export default function Settings() {
           </p>
           <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+ space-y-3">
             <div className="flex flex-col gap-3">
-              <div className="w-full flex items-center justify-between">
-                <p>Change Password</p>
-                <Link
-                  to="/reset-password"
-                  className="hover:underline underline-offset-4 text-primary"
-                >
+              <Link to="/change-password">
+                <div className="w-full flex items-center justify-between">
+                  <p>Change Password</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -67,17 +73,45 @@ export default function Settings() {
                       d="M8.25 4.5l7.5 7.5-7.5 7.5"
                     />
                   </svg>
-                </Link>
-              </div>
+                </div>
+              </Link>
               <Separator />
               <div className="w-full flex flex-col gap-2">
                 <p>Sign out of current device</p>
-                <Button variant="secondary">Sign Out</Button>
+                <Dialog>
+                  <DialogTrigger>
+                    <Button variant="secondary">Sign Out</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Sign Out</DialogTitle>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <Button type="submit" variant="secondary">Confirm</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
               <Separator />
               <div className="w-full flex flex-col gap-2">
                 <p>Delete Account</p>
-                <Button variant="secondary">Delete Account</Button>
+                <Dialog>
+                  <DialogTrigger>
+                    <Button variant="secondary">Delete Account</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                      <DialogDescription>
+                        This action cannot be undone. Are you sure you want to
+                        permanently delete your account?
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <Button type="submit">Delete Account</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
@@ -89,11 +123,11 @@ export default function Settings() {
           </p>
           <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
             <div className="flex items-center justify-between">
-              <Label htmlFor="notifications-preferences" className="text-base">
-                Theme
-              </Label>
+              <Label className="text-base">Theme</Label>
               <DropdownMenu>
-                <DropdownMenuTrigger className="text-primary text-sm">Change Theme</DropdownMenuTrigger>
+                <DropdownMenuTrigger className="text-primary text-sm">
+                  Change Theme
+                </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => setTheme("light")}>
                     Light

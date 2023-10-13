@@ -8,7 +8,7 @@ export default function AuthLeftPane() {
         <img src={appIcon} alt="App appIcon" className="w-28" />
       </div>
       <div className="relative z-20 mt-auto">
-        <p className="text-lg text-tertiary-foreground">
+        <p className="text-lg text-gray-400">
           Discover, learn, and grow with Learner app. Access tons of courses,
           expert instructors, and flexible learning at your fingertips
         </p>

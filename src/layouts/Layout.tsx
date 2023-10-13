@@ -3,7 +3,7 @@ import TabBar from "../components/TabBar";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 
-export default function LayoutOne() {
+export default function Layout() {
   return (
     <>
       <Header />

@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import LayoutOne from "./layouts/LayoutOne";
-import LayoutTwo from "./layouts/LayoutTwo";
+import Layout from "./layouts/Layout";
 import Library from "./pages/Library";
 import Search from "./pages/Search";
 import Home from "./pages/Home";
@@ -16,10 +15,11 @@ import Auth from "./pages/auth/Auth";
 import CreateProfile from "./pages/auth/CreateProfile";
 import CreateInstructorProfile from "./pages/auth/CreateInstructorProfile";
 import ForgotPassword from "./pages/auth/ForgotPassword";
-import ResetPassword from "./pages/auth/ResetPassword";
+import ChangePassword from "./pages/auth/ChangePassword";
 
 export default function App() {
-  const isInstructor = false;
+  const isInstructor = true;
+  const user = false;
 
   return (
     <div className="h-screen">
@@ -29,35 +29,30 @@ export default function App() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        {isInstructor ? (
-          <Route
-            path="/create-instructor-profile"
-            element={<CreateInstructorProfile />}
-          />
-        ) : (
-          <Route path="/create-profile" element={<CreateProfile />} />
-        )}
-
-        {isInstructor ? (
-          <Route path="/" element={<LayoutTwo />}>
-            <Route index element={<Courses />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/new" element={<CreateCourse />} />
-          </Route>
-        ) : (
-          <Route path="/" element={<LayoutOne />}>
-            <Route index element={<Home />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="course/:id" element={<CourseDetails />} />
-            <Route path="/search">
-              <Route index element={<Search />} />
-              <Route path="/search/:id" element={<SearchResults />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        )}
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/create-profile" element={<CreateProfile />} />
+        
+        <Route path="/" element={<Layout />}>
+          {isInstructor ? (
+            <>
+              <Route index element={<Courses />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/new" element={<CreateCourse />} />
+            </>
+          ) : (
+            <>
+              <Route index element={<Home />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="course/:id" element={<CourseDetails />} />
+              <Route path="/search">
+                <Route index element={<Search />} />
+                <Route path="/search/:id" element={<SearchResults />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </>
+          )}
+        </Route>
       </Routes>
     </div>
   );

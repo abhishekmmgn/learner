@@ -14,13 +14,11 @@ const onSubmit = async (values, actions) => {
 const passwordRules: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const initialValues = {
-  email: "",
   password: "",
   confirmPassword: "",
 };
 
 const validationSchema = Yup.object({
-  email: Yup.string().email("Please enter a valid email").required("Required"),
   password: Yup.string()
     .min(8, "Password must be minimum 8 characters")
     .max(20, "Password must be at most 20 characters")
@@ -30,10 +28,10 @@ const validationSchema = Yup.object({
     .required("Required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Required")
+    .required("Required"),
 });
 
-export default function RegistrationForm() {
+export default function ResetPasswordForm() {
   const {
     values,
     errors,
@@ -52,24 +50,6 @@ export default function RegistrationForm() {
     <form onSubmit={handleSubmit}>
       <div className="grid gap-3">
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoCapitalize="none"
-            autoComplete="email"
-            autoCorrect="off"
-            disabled={isSubmitting}
-          />
-          {errors.email && touched.email && (
-            <p className="text-destructive text-sm">{errors.email}</p>
-          )}
-        </div>
-        <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
@@ -82,7 +62,7 @@ export default function RegistrationForm() {
             autoComplete="password"
             autoCorrect="off"
             disabled={isSubmitting}
-          />
+          />{" "}
           {errors.password && touched.password && (
             <p className="text-destructive text-sm">{errors.password}</p>
           )}
@@ -109,7 +89,7 @@ export default function RegistrationForm() {
           {isSubmitting && (
             <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
           )}
-          Sign Up
+          Done
         </Button>
       </div>
     </form>

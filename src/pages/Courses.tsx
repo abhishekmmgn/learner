@@ -8,7 +8,7 @@ export default function Courses() {
   return (
     <>
       {hasCourses ? (
-        <div className="px-4 py-6 sm:py-8 md:py-10 lg:pt-12 md:pb-0 flex flex-col items-center justify-center md:px-6 lg:px-0">
+        <div className="pl-4 py-6 md:pl-6 space-y-6 xl:pl-8 sm:py-8 md:py-10 lg:pt-12 md:pb-0 sm:space-y-8 xl:space-y-10">
           <div className="w-full px-4 xl:max-w-6xl flex flex-col items-center justify-center md:grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
             <InstructorCourseCard
               title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"

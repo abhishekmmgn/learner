@@ -14,13 +14,13 @@ export default function CourseCardStretched(props) {
           {props.title}
         </h1>
 
-        <p className="line-clamp-1 text-gray-700 block text-sm md:text-base">
+        <p className="line-clamp-1 text-gray-700 block text-sm md:text-sm+ dark:text-gray-300">
           Students: {props.students}
         </p>
-        <p className="my-[0.5px] line-clamp-1 text-gray-700 block text-sm md:text-base md:my-[1px]">
+        <p className="line-clamp-1 text-gray-700 block text-sm md:text-sm+ my-[2px] dark:text-gray-300">
           Instructors: {props.instructors}
         </p>
-        <p className="line-clamp-1 text-gray-700 block text-sm md:text-base">
+        <p className="line-clamp-1 text-gray-700 block text-sm md:text-sm+ dark:text-gray-300">
           Topics: {props.topics}
         </p>
       </div>

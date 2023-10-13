@@ -5,7 +5,7 @@ import AuthLeftPane from "../../components/AuthLeftPane";
 export default function Auth() {
   return (
     <>
-      <div className="container relative h-screen mt-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 md:mt-0">
+      <div className="container relative bg-background h-screen pt-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 md:pt-0">
         <AuthLeftPane />
         <div className="mx-auto flex w-full text-center flex-col justify-center space-y-8 sm:w-[350px]">
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -18,7 +18,17 @@ export default function Auth() {
             <Link to="/login">
               <Button variant="secondary">Log in to Existing Account</Button>
             </Link>
-            <Button variant="outline" className="gap-1">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+            <Button variant="outline" type="button" className="gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
