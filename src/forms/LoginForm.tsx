@@ -4,12 +4,10 @@ import { Label } from "../components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-const onSubmit = async (values, actions) => {
-  console.log("Hi, Mom!");
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+import { auth } from "../firebase-cofig";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -25,6 +23,9 @@ const validationSchema = Yup.object({
 });
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
   const {
     values,
     errors,
@@ -36,7 +37,30 @@ export default function LoginForm() {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: async (values, actions) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      signInWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+          setError(errorMessage);
+        });
+
+      actions.resetForm();
+
+      if (true) {
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
+    },
   });
 
   return (
@@ -78,6 +102,8 @@ export default function LoginForm() {
             <p className="text-destructive text-sm">{errors.password}</p>
           )}
         </div>
+
+        {error && <p className="text-destructive text-sm">{error}</p>}
 
         <Button type="submit" disabled={isSubmitting} className="mt-1">
           {isSubmitting && (

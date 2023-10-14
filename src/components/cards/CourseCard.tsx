@@ -5,6 +5,7 @@ export default function CourseCard(props) {
         src={props.photo}
         alt="Course Photo"
         className="bg-background w-full object-cover aspect-video rounded-t-lg"
+        loading="lazy"
       />
       <div className="h-44 flex flex-col justify-center px-3 w-full overflow-clip md:h-[196px] py-4">
         <p className="mb-1 text-primary line-clamp-1 text-sm">

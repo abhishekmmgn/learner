@@ -13,13 +13,14 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Auth from "./pages/auth/Auth";
 import CreateProfile from "./pages/auth/CreateProfile";
-import CreateInstructorProfile from "./pages/auth/CreateInstructorProfile";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ChangePassword from "./pages/auth/ChangePassword";
+import { useAuthContext } from "./contexts/AuthProvider";
 
 export default function App() {
-  const isInstructor = true;
-  const user = false;
+  const { user, isInstructor } = useAuthContext();
+  console.log(user);
+  console.log(isInstructor);
 
   return (
     <div className="h-screen">
@@ -31,7 +32,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/create-profile" element={<CreateProfile />} />
-        
+
         <Route path="/" element={<Layout />}>
           {isInstructor ? (
             <>

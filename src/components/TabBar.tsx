@@ -6,10 +6,12 @@ import {
   BookmarkIcon,
 } from "@radix-ui/react-icons";
 import { Link, useLocation } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthProvider";
+
 
 export default function TabBar() {
   const location = useLocation();
-  const isInstructor = false;
+  const { isInstructor } = useAuthContext();
   return (
     <div
       className={`fixed px-4 border-t bg-tertiary backdrop-filter backdrop-blur-xl bg-opacity-90 z-50 inset-x-0 bottom-0 w-full h-[52px] pb-1 flex items-center md:hidden`}

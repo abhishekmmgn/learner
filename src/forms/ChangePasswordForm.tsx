@@ -4,12 +4,9 @@ import { Label } from "../components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-const onSubmit = async (values, actions) => {
-  console.log("Hi, Mom!");
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+import { auth } from "../firebase-cofig";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const passwordRules: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
@@ -32,6 +29,11 @@ const validationSchema = Yup.object({
 });
 
 export default function ResetPasswordForm() {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const user = auth.currentUser;
+
   const {
     values,
     errors,
@@ -43,7 +45,29 @@ export default function ResetPasswordForm() {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: async (values, actions) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      try {
+        const user = firebase.auth().currentUser;
+        if (user) {
+          await user.updatePassword(values.password);
+          setSuccess("Password updated successfully");
+        } else {
+          setError("No user found");
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+
+      actions.resetForm();
+
+      if (true) {
+        setTimeout(() => {
+          navigate("/settings");
+        }, 1000);
+      }
+    },
   });
 
   return (
@@ -85,6 +109,11 @@ export default function ResetPasswordForm() {
             <p className="text-destructive text-sm">{errors.confirmPassword}</p>
           )}
         </div>
+
+        {error && <p className="text-destructive text-sm">{error}</p>}
+
+        {success && <p className="text-[#0081ff] text-sm">{success}</p>}
+
         <Button type="submit" disabled={isSubmitting} className="mt-1">
           {isSubmitting && (
             <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />

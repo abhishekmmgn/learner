@@ -6,10 +6,13 @@ import {
   BookmarkIcon,
 } from "@radix-ui/react-icons";
 import { Link, useLocation } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthProvider";
+
 
 export default function Sidebar() {
   const location = useLocation();
-  const isInstructor = false;
+  const { isInstructor } = useAuthContext();
+
   return (
     <div className="z-50 hidden fixed inset-y-0 h-full border-r bg-background backdrop-filter backdrop-blur-xl bg-opacity-90 py-2 px-3 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col gap-2">
       <h1 className="mt-2 h-11 text-xl pl-2 pt-1 lg:pt-0 font-medium w-full">

@@ -6,6 +6,7 @@ export default function SuggestionCard(props) {
         src={props.photo}
         alt="Topic Photo"
         className="absolute inset-y-0 inset-x-0 bg-background w-full object-cover aspect-video rounded-lg"
+        loading="lazy"
       />
       <div className="absolute inset-y-0 inset-x-0 bg-black/25 w-full object-cover aspect-video rounded-lg hover:bg-black/30"></div>
       <p className="absolute bottom-3 left-3 text-white text-base md:text-lg line-clamp-1">

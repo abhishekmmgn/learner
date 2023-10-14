@@ -1,5 +1,5 @@
-import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom";
+import { Button, buttonVariants } from "../components/ui/button";
+import { Link, useNavigate } from "react-router-dom";
 import { Separator } from "../components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Label } from "../components/ui/label";
@@ -28,94 +28,137 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
-import { useTheme } from "../components/theme-provider";
+import { useTheme } from "../contexts/ThemeProvider";
+import { auth } from "../firebase-cofig";
+import { signOut } from "firebase/auth";
+import { useAuthContext } from "../contexts/AuthProvider";
+
 
 export default function Settings() {
+  const navigate = useNavigate();
   const { setTheme } = useTheme();
 
-  const isInstructor = false;
+  const { user, isInstructor, setIsInstructor } = useAuthContext();
+
+  function handleSignOut() {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        setIsInstructor(localStorage.setItem("isInstructor", "false"));
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  }
+
+  function deleteAccount() {
+    // Delete auth
+    // Delete data
+    handleSignOut();
+  }
+
   return (
     <div className="p-4 md:px-6 xl:px-8 py-6 sm:py-8 md:pt-12 md:pb-0 flex flex-col items-center">
       <div className="w-full md:max-w-2xl xl:mr-[248px] space-y-4">
-        <div className="flex gap-3 items-center bg-background p-4 rounded-lg">
-          <div>
-            <Avatar className="w-16 h-16">
-              <AvatarImage src="" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+        {user ? (
+          <div className="flex gap-3 items-center bg-background p-4 rounded-lg">
+            <div>
+              <Avatar className="w-16 h-16">
+                <AvatarImage src="" />
+                <AvatarFallback>{user.displayName[0]}</AvatarFallback>
+              </Avatar>
+            </div>
+            <div>
+              <h1 className="text-lg">{user.displayName}</h1>
+              <p className="text-tertiary-foreground">{user.email}</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-lg">John Doe</h1>
-            <p className="text-tertiary-foreground">asdf@x.com</p>
-          </div>
-        </div>
+        ) : (
+          <Link to="/auth" className={buttonVariants({ variant: "default" })}>
+            Log In
+          </Link>
+        )}
 
-        <div>
-          <p className="mb-2 text-sm md:text-base font-medium text-primary">
-            Account
-          </p>
-          <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+ space-y-3">
-            <div className="flex flex-col gap-3">
-              <Link to="/change-password">
-                <div className="w-full flex items-center justify-between">
-                  <p>Change Password</p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
+        {user && (
+          <div>
+            <p className="mb-2 text-sm md:text-base font-medium text-primary">
+              Account
+            </p>
+            <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+ space-y-3">
+              <div className="flex flex-col gap-3">
+                <Link to="/change-password">
+                  <div className="w-full flex items-center justify-between">
+                    <p>Change Password</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </div>
+                </Link>
+                <Separator />
+                <div className="w-full flex flex-col gap-2">
+                  <p>Sign out of current device</p>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary">Sign Out</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Sign Out</DialogTitle>
+                      </DialogHeader>
+                      <DialogFooter>
+                        <Button
+                          type="submit"
+                          variant="secondary"
+                          onClick={handleSignOut}
+                        >
+                          Confirm
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
-              </Link>
-              <Separator />
-              <div className="w-full flex flex-col gap-2">
-                <p>Sign out of current device</p>
-                <Dialog>
-                  <DialogTrigger>
-                    <Button variant="secondary">Sign Out</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Sign Out</DialogTitle>
-                    </DialogHeader>
-                    <DialogFooter>
-                      <Button type="submit" variant="secondary">Confirm</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <Separator />
-              <div className="w-full flex flex-col gap-2">
-                <p>Delete Account</p>
-                <Dialog>
-                  <DialogTrigger>
-                    <Button variant="secondary">Delete Account</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                      <DialogDescription>
-                        This action cannot be undone. Are you sure you want to
-                        permanently delete your account?
-                      </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter>
-                      <Button type="submit">Delete Account</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+                <Separator />
+                <div className="w-full flex flex-col gap-2">
+                  <p>Delete Account</p>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary">Delete Account</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                        <DialogDescription>
+                          This action cannot be undone. Are you sure you want to
+                          permanently delete your account?
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter>
+                        <Button type="submit" onClick={deleteAccount}>
+                          Delete Account
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div>
           <p className="mb-2 text-sm md:text-base font-medium text-primary">
@@ -144,21 +187,26 @@ export default function Settings() {
           </div>
         </div>
 
-        <div>
-          <p className="mb-2 text-sm md:text-base font-medium text-primary">
-            Notifications
-          </p>
-          <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="notifications-preferences" className="text-base">
-                Turn of Notifications
-              </Label>
-              <Switch id="notifications-preferences" />
+        {user && (
+          <div>
+            <p className="mb-2 text-sm md:text-base font-medium text-primary">
+              Notifications
+            </p>
+            <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
+              <div className="flex items-center justify-between">
+                <Label
+                  htmlFor="notifications-preferences"
+                  className="text-base"
+                >
+                  Turn of Notifications
+                </Label>
+                <Switch id="notifications-preferences" />
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {!isInstructor && (
+        {user && !isInstructor && (
           <div>
             <p className="mb-2 text-sm md:text-base font-medium text-primary">
               Learning Reminders

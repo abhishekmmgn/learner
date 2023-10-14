@@ -12,8 +12,9 @@ export default function InstructorCourseCard(props) {
         src={props.photo}
         alt="Course Photo"
         className="bg-background w-full object-cover aspect-video rounded-t-lg"
+        loading="lazy"
       />
-      <div className="h-20 p-3 flex items-start justify-between">
+      <div className="h-20 p-3 pr-0 flex items-start justify-between">
         <h1 className="font-medium line-clamp-2 w-[90%]">{props.title}</h1>
         <div className="w-[10%]">
           <DropdownMenu>

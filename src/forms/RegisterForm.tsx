@@ -4,12 +4,10 @@ import { Label } from "../components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-const onSubmit = async (values, actions) => {
-  console.log("Hi, Mom!");
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+import { auth } from "../firebase-cofig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const passwordRules: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
@@ -30,10 +28,13 @@ const validationSchema = Yup.object({
     .required("Required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Required")
+    .required("Required"),
 });
 
 export default function RegistrationForm() {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
   const {
     values,
     errors,
@@ -45,7 +46,30 @@ export default function RegistrationForm() {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: async (values, actions) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      createUserWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+          setError(errorMessage);
+        });
+
+      actions.resetForm();
+
+      if (true) {
+        setTimeout(() => {
+          navigate("/create-profile");
+        }, 1000);
+      }
+    },
   });
 
   return (
@@ -105,6 +129,9 @@ export default function RegistrationForm() {
             <p className="text-destructive text-sm">{errors.confirmPassword}</p>
           )}
         </div>
+
+        {error && <p className="text-destructive text-sm">{error}</p>}
+
         <Button type="submit" disabled={isSubmitting} className="mt-1">
           {isSubmitting && (
             <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />

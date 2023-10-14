@@ -4,7 +4,8 @@ function TopicCard(props) {
       <img
         src={props.photo}
         alt="Topic Photo"
-        className="absolute inset-y-0 inset-x-0 bg-background w-full object-cover aspect-video rounded-lg "
+        className="absolute inset-y-0 inset-x-0 bg-background w-full object-cover aspect-video rounded-lg"
+        loading="lazy"
       />
       <div className="absolute inset-y-0 inset-x-0 bg-gradient-to-b from-transparent to-black/80 w-full object-cover aspect-video rounded-lg hover:bg-black/20"></div>
       <p className="absolute bottom-3 left-3 text-white text-base md:text-lg line-clamp-1">
