@@ -1,5 +1,5 @@
 import { Button, buttonVariants } from "../components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Separator } from "../components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Label } from "../components/ui/label";
@@ -28,36 +28,55 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
+import toast from "react-hot-toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useState } from "react";
 import { useTheme } from "../contexts/ThemeProvider";
-import { auth } from "../firebase-cofig";
-import { signOut } from "firebase/auth";
+import { auth, db } from "../firebase-cofig";
+import { signOut, deleteUser } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
 import { useAuthContext } from "../contexts/AuthProvider";
 
-
 export default function Settings() {
-  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { setTheme } = useTheme();
+  const { user, isInstructor } = useAuthContext();
 
-  const { user, isInstructor, setIsInstructor } = useAuthContext();
+  async function handleSignOut() {
+    setIsSubmitting(!isSubmitting);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  function handleSignOut() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        setIsInstructor(localStorage.setItem("isInstructor", "false"));
+        localStorage.removeItem("isInstructor");
+        toast.success("Sign out successfully");
       })
       .catch((error) => {
         // An error happened.
       });
-
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
   }
 
-  function deleteAccount() {
-    // Delete auth
-    // Delete data
+  async function deleteAccount() {
+    setIsSubmitting(!isSubmitting);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const docRef = doc(db, "users", `${user.uid}`);
+    await deleteDoc(docRef)
+      .then(() => {
+        toast.success("Account deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Something went wrong");
+      });
+
+    try {
+      await deleteUser(user);
+    } catch {
+      // An error happened.
+    }
+
     handleSignOut();
   }
 
@@ -69,12 +88,14 @@ export default function Settings() {
             <div>
               <Avatar className="w-16 h-16">
                 <AvatarImage src="" />
-                <AvatarFallback>{user.displayName[0]}</AvatarFallback>
+                <AvatarFallback className="text-2xl">
+                  {user.displayName[0]}
+                </AvatarFallback>
               </Avatar>
             </div>
             <div>
-              <h1 className="text-lg">{user.displayName}</h1>
-              <p className="text-tertiary-foreground">{user.email}</p>
+              <h1 className="text-lg">{user?.displayName}</h1>
+              <p className="text-tertiary-foreground">{user?.email}</p>
             </div>
           </div>
         ) : (
@@ -126,6 +147,9 @@ export default function Settings() {
                           variant="secondary"
                           onClick={handleSignOut}
                         >
+                          {isSubmitting && (
+                            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                          )}
                           Confirm
                         </Button>
                       </DialogFooter>
@@ -148,8 +172,15 @@ export default function Settings() {
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter>
-                        <Button type="submit" onClick={deleteAccount}>
-                          Delete Account
+                        <Button
+                          type="submit"
+                          variant="secondary"
+                          onClick={deleteAccount}
+                        >
+                          {isSubmitting && (
+                            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                          )}
+                          Delete
                         </Button>
                       </DialogFooter>
                     </DialogContent>
@@ -274,7 +305,16 @@ export default function Settings() {
           </div>
         </div>
 
-        <Button variant="outline">Share App</Button>
+        <Button
+          variant="outline"
+          onClick={() =>
+            toast("Link copied successfully!", {
+              icon: "🔗",
+            })
+          }
+        >
+          Share App
+        </Button>
       </div>
     </div>
   );

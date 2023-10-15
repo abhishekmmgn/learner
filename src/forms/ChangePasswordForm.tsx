@@ -2,6 +2,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import toast from "react-hot-toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { auth } from "../firebase-cofig";
@@ -18,7 +19,7 @@ const initialValues = {
 const validationSchema = Yup.object({
   password: Yup.string()
     .min(8, "Password must be minimum 8 characters")
-    .max(20, "Password must be at most 20 characters")
+    .max(20, "Password must be less than 20 characters")
     .matches(passwordRules, {
       message: "Please create a stronger password",
     })
@@ -28,10 +29,9 @@ const validationSchema = Yup.object({
     .required("Required"),
 });
 
-export default function ResetPasswordForm() {
+export default function ChangePasswordForm() {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState<boolean>(false);
   const user = auth.currentUser;
 
   const {
@@ -52,17 +52,19 @@ export default function ResetPasswordForm() {
         const user = firebase.auth().currentUser;
         if (user) {
           await user.updatePassword(values.password);
-          setSuccess("Password updated successfully");
+          setSuccess(!success);
+          toast.success("Password updated successfully");
         } else {
-          setError("No user found");
+          toast.error("You must be logged in to update your password.");
         }
       } catch (error) {
         setError(error.message);
+        toast.error("Something went wrong");
       }
 
       actions.resetForm();
 
-      if (true) {
+      if (success) {
         setTimeout(() => {
           navigate("/settings");
         }, 1000);
@@ -109,10 +111,6 @@ export default function ResetPasswordForm() {
             <p className="text-destructive text-sm">{errors.confirmPassword}</p>
           )}
         </div>
-
-        {error && <p className="text-destructive text-sm">{error}</p>}
-
-        {success && <p className="text-[#0081ff] text-sm">{success}</p>}
 
         <Button type="submit" disabled={isSubmitting} className="mt-1">
           {isSubmitting && (

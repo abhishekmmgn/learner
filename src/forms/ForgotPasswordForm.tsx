@@ -3,8 +3,14 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { useFormik } from "formik";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import toast from "react-hot-toast";
 import * as Yup from "yup";
 import { auth } from "../firebase-cofig";
+import {
+  connectAuthEmulator,
+  sendPasswordResetEmail,
+  confirmPasswordReset,
+} from "firebase/auth";
 import { useState } from "react";
 
 const initialValues = {
@@ -16,8 +22,7 @@ const validationSchema = Yup.object({
 });
 
 export default function ForgotPasswordForm() {
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState<boolean>(false);
 
   const {
     values,
@@ -34,10 +39,11 @@ export default function ForgotPasswordForm() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       try {
-        await auth.sendPasswordResetEmail(values.email);
-        setSuccess("Password reset link sent successfully. Check your email.");
+        await sendPasswordResetEmail(auth, values.email);
+        setSuccess(!success);
+        toast.success("Password reset link sent successfully. Check your email.");
       } catch (error) {
-        setError(error.message);
+        toast.error("Something went wrong")
       }
 
       actions.resetForm();
@@ -65,11 +71,6 @@ export default function ForgotPasswordForm() {
             <p className="text-destructive text-sm">{errors.email}</p>
           )}
         </div>
-
-        {error && <p className="text-destructive text-sm">{error}</p>}
-
-        {success && <p className="text-[#0081ff] text-sm">{success}</p>}
-
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting && (
             <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />

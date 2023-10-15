@@ -6,11 +6,13 @@ import { Switch } from "../components/ui/switch";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { auth, db } from "../firebase-cofig";
+import { db } from "../firebase-cofig";
 import { updateProfile } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthProvider";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const initialValues = {
   name: "",
@@ -31,8 +33,9 @@ const validationSchema = Yup.object({
 });
 
 export default function CreateProfileForm() {
+  const [success, setSuccess] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { user, profileId, setProfileId, setIsInstructor } = useAuthContext();
+  const { user, setIsInstructor } = useAuthContext();
 
   const {
     values,
@@ -48,10 +51,8 @@ export default function CreateProfileForm() {
     onSubmit: async (values, actions) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      actions.resetForm();
-
       if (!user.displayName) {
-        await updateProfile(auth.currentUser, {
+        await updateProfile(user, {
           displayName: values.name,
         });
       }
@@ -59,23 +60,33 @@ export default function CreateProfileForm() {
       const profile = {
         bio: values.bio,
         isInstructor: values.isInstructor,
-        uid: user.uid,
       };
 
-      const docRef = await addDoc(collection(db, "users"), profile);
+      const docRef = doc(db, "users", user.uid);
+      try {
+        await setDoc(docRef, profile);
+        toast.success("Profile created successfully");
+        setSuccess(true);
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
+      }
 
-      localStorage.setItem("profileId", docRef.id);
-      setProfileId(docRef.id);
+      if (values.isInstructor) {
+        localStorage.setItem("isInstructor", `true`);
+      }
+      setIsInstructor(values.isInstructor);
 
-      setIsInstructor(
-        localStorage.setItem("isInstructor", `${values.isInstructor}`)
-      );
+      actions.resetForm();
 
-      if (profileId) {
+      toast.success(`${success}`);
+      
+      if (success) {
         setTimeout(() => {
           navigate("/");
         }, 1000);
       }
+      toast.success(`${success}`);
     },
   });
   return (

@@ -1,30 +1,37 @@
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import toast from "react-hot-toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Textarea } from "../components/ui/textarea";
-
-const onSubmit = async (values, actions) => {
-  console.log("Hi, Mom!");
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+import { useNavigate } from "react-router-dom";
+import { db, storage } from "../firebase-cofig";
+import {
+  collection,
+  doc,
+  addDoc,
+  updateDoc,
+  serverTimestamp,
+  arrayUnion,
+} from "firebase/firestore";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { useAuthContext } from "../contexts/AuthProvider";
 
 const initialValues = {
   title: "",
   description: "",
   image: "",
   duration: "",
-  level: "",
-  topic: "",
+  topics: "",
   audio: "",
   subtitles: "",
 };
 
 const validationSchema = Yup.object({
   title: Yup.string()
-    .min(5, "Title should be atleast 5 characters long")
+    .min(10, "Title should be atleast 5 characters long")
     .max(28, "Title should be less than 28 characters")
     .required("Required"),
   description: Yup.string()
@@ -33,13 +40,21 @@ const validationSchema = Yup.object({
     .required("Required"),
   image: Yup.string().required("Required"),
   duration: Yup.string().required("Required"),
-  level: Yup.string().required("Required"),
-  topic: Yup.string().required("Required"),
+  topics: Yup.string().required("Required"),
   audio: Yup.string().required("Required"),
   subtitles: Yup.string().required("Required"),
+  attachments: Yup.array().of(
+    Yup.object({
+      name: Yup.string().required("Required"),
+      url: Yup.string().required("Required"),
+    }).optional()
+  ),
 });
 
 export default function CreateCourseForm() {
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
   const {
     values,
     errors,
@@ -51,8 +66,74 @@ export default function CreateCourseForm() {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: async (values, actions) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const data = {
+        title: values.title,
+        description: values.description,
+        image: values.image,
+        duration: values.duration,
+        topics: values.topics,
+        audio: values.audio,
+        subtitles: values.subtitles,
+        // attachments: values.attachments,
+        instructorId: user.uid,
+        instructor: user.displayName,
+        students: 0,
+      };
+
+      try {
+        const courseRef = await addDoc(collection(db, "courses"), {
+          ...data,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        });
+
+        // Get the newly created course's ID
+        const courseId = courseRef.id;
+
+        // Add the course to the instructor's courses collection
+        const userCoursesDocRef = doc(db, "users", user.uid);
+        await updateDoc(userCoursesDocRef, {
+          courses: arrayUnion(courseId),
+        });
+
+        toast.success("Course created successfully");
+        
+        actions.resetForm();
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      } 
+      catch (error) {
+        toast.error("Course creation failed");
+        console.error(error);
+      }
+    },
   });
+
+  async function handleImageUpload(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const file = (e.target as HTMLInputElement).files[0];
+    if (file) {
+      const storageRef = await ref(
+        storage,
+        `courses/${Date.now()}-${file.name}`
+      );
+      try {
+        await uploadBytes(storageRef, file); // Upload the file to Firebase Storage
+
+        // Get the download URL
+        const downloadURL = await getDownloadURL(storageRef);
+        values.image = downloadURL;
+      } catch (error) {
+        console.error("Error uploading the file:", error);
+      }
+    }
+  }
 
   return (
     <div className="grid gap-6">
@@ -68,28 +149,26 @@ export default function CreateCourseForm() {
               id="image"
               type="file"
               accept="image/*"
-              value={values.image}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              onChange={handleImageUpload}
               disabled={isSubmitting}
-              className={`w-fit border-none ${
-                errors.image && touched.image ? "input-error" : ""
-              }`}
             />
+            {errors.image && touched.image && (
+              <p className="text-destructive text-sm">{errors.image}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="title">Title</Label>
             <Textarea
               id="title"
-              placeholder="Wrtie a title for your course"
+              placeholder="Write a catchy title"
               value={values.title}
               onChange={handleChange}
               onBlur={handleBlur}
               disabled={isSubmitting}
-              className={`resize-none ${
-                errors.title && touched.title ? "input-error" : ""
-              }`}
             />
+            {errors.title && touched.title && (
+              <p className="text-destructive text-sm">{errors.title}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="description">Description</Label>
@@ -100,40 +179,10 @@ export default function CreateCourseForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               disabled={isSubmitting}
-              className={`h-32 resize-none ${
-                errors.description && touched.description ? "input-error" : ""
-              }`}
             />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="level">Level</Label>
-            <Input
-              id="level"
-              type="text"
-              placeholder="Beginner, Intermediate, Advanced"
-              value={values.level}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              disabled={isSubmitting}
-              className={`${
-                errors.level && touched.level ? "input-error" : ""
-              }`}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="level">Level</Label>
-            <Input
-              id="level"
-              type="text"
-              placeholder="Beginner, Intermediate, Advanced, etc."
-              value={values.level}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              disabled={isSubmitting}
-              className={`${
-                errors.level && touched.level ? "input-error" : ""
-              }`}
-            />
+            {errors.description && touched.description && (
+              <p className="text-destructive text-sm">{errors.description}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="duration">Duration</Label>
@@ -145,25 +194,25 @@ export default function CreateCourseForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               disabled={isSubmitting}
-              className={`${
-                errors.duration && touched.duration ? "input-error" : ""
-              }`}bg-red-300 
             />
+            {errors.duration && touched.duration && (
+              <p className="text-destructive text-sm">{errors.duration}</p>
+            )}
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="topic">Topic</Label>
+            <Label htmlFor="topics">Topics</Label>
             <Input
-              id="topic"
+              id="topics"
               type="text"
               placeholder="Angular, Smart Farming, Biotechnology etc."
-              value={values.topic}
+              value={values.topics}
               onChange={handleChange}
               onBlur={handleBlur}
               disabled={isSubmitting}
-              className={`${
-                errors.topic && touched.topic ? "input-error" : ""
-              }`}
             />
+            {errors.topics && touched.topics && (
+              <p className="text-destructive text-sm">{errors.topics}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="audio">Audio</Label>
@@ -175,10 +224,10 @@ export default function CreateCourseForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               disabled={isSubmitting}
-              className={`${
-                errors.audio && touched.audio ? "input-error" : ""
-              }`}
             />
+            {errors.audio && touched.audio && (
+              <p className="text-destructive text-sm">{errors.audio}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="subtitles">Subtitles</Label>
@@ -190,27 +239,14 @@ export default function CreateCourseForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               disabled={isSubmitting}
-              className={`${
-                errors.subtitles && touched.subtitles ? "input-error" : ""
-              }`}
             />
+            {errors.subtitles && touched.subtitles && (
+              <p className="text-destructive text-sm">{errors.subtitles}</p>
+            )}
           </div>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="mr-2 h-4 w-4 animate-spin"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
             )}
             Done
           </Button>

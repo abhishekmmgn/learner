@@ -20,7 +20,7 @@ import { useAuthContext } from "./contexts/AuthProvider";
 export default function App() {
   const { user, isInstructor } = useAuthContext();
   console.log(user);
-  console.log(isInstructor);
+  // console.log(isInstructor);
 
   return (
     <div className="h-screen">
@@ -28,10 +28,11 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/create-profile" element={<CreateProfile />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="*" element={<NotFound />} />
 
         <Route path="/" element={<Layout />}>
           {isInstructor ? (

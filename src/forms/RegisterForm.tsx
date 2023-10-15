@@ -8,6 +8,7 @@ import { auth } from "../firebase-cofig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthProvider";
 
 const passwordRules: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
@@ -32,6 +33,7 @@ const validationSchema = Yup.object({
 });
 
 export default function RegistrationForm() {
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -64,7 +66,7 @@ export default function RegistrationForm() {
 
       actions.resetForm();
 
-      if (true) {
+      if (user) {
         setTimeout(() => {
           navigate("/create-profile");
         }, 1000);

@@ -4,10 +4,12 @@ import { Label } from "../components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { auth } from "../firebase-cofig";
+import { auth, db } from "../firebase-cofig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { getDoc, doc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthProvider";
 
 const initialValues = {
   email: "",
@@ -23,8 +25,20 @@ const validationSchema = Yup.object({
 });
 
 export default function LoginForm() {
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+
+  const getUserData = async () => {
+    try {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      console.log(docSnap.data());
+    } catch (error) {
+      console.log(error.code);
+    }
+    // Put in id here
+  };
 
   const {
     values,
@@ -53,9 +67,11 @@ export default function LoginForm() {
           setError(errorMessage);
         });
 
+      getUserData();
+
       actions.resetForm();
 
-      if (true) {
+      if (user) {
         setTimeout(() => {
           navigate("/");
         }, 1000);
