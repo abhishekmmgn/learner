@@ -5,11 +5,12 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { auth, db } from "../firebase-cofig";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthProvider";
+import toast from "react-hot-toast";
 
 const initialValues = {
   email: "",
@@ -25,7 +26,7 @@ const validationSchema = Yup.object({
 });
 
 export default function LoginForm() {
-  const { user } = useAuthContext();
+  const { user, setIsInstructor } = useAuthContext();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -33,11 +34,12 @@ export default function LoginForm() {
     try {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap.data());
+      if (docSnap.exists()) {
+        return docSnap.data();
+      }
     } catch (error) {
       console.log(error.code);
     }
-    // Put in id here
   };
 
   const {
@@ -55,27 +57,25 @@ export default function LoginForm() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       signInWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
+        .then(() => {
           // Signed up
-          const user = userCredential.user;
-          // ...
+          const userData = getUserData();
+          if (userData?.isInstructor) {
+            localStorage.setItem("isInstructor", `true`);
+          }
+          setIsInstructor(userData?.isInstructor);
+          toast.success("Signed in successfully");
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          // ..
           setError(errorMessage);
         });
 
-      getUserData();
-
       actions.resetForm();
-
-      if (user) {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      }
     },
   });
 

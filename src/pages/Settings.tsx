@@ -32,290 +32,290 @@ import toast from "react-hot-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
 import { useTheme } from "../contexts/ThemeProvider";
-import { auth, db } from "../firebase-cofig";
-import { signOut, deleteUser } from "firebase/auth";
-import { doc, deleteDoc } from "firebase/firestore";
+import { logOut, deleteAccount } from "@/utils/ManageAuth";
 import { useAuthContext } from "../contexts/AuthProvider";
+import { SettingsSkeleton } from "@/components/skeletons/SettingsSkeleton";
 
 export default function Settings() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { setTheme } = useTheme();
-  const { user, isInstructor } = useAuthContext();
+  const { user, loading, isInstructor } = useAuthContext();
 
   async function handleSignOut() {
-    setIsSubmitting(!isSubmitting);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        localStorage.removeItem("isInstructor");
-        toast.success("Sign out successfully");
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  }
-
-  async function deleteAccount() {
-    setIsSubmitting(!isSubmitting);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    const docRef = doc(db, "users", `${user.uid}`);
-    await deleteDoc(docRef)
-      .then(() => {
-        toast.success("Account deleted successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Something went wrong");
-      });
-
     try {
-      await deleteUser(user);
-    } catch {
-      // An error happened.
+      setIsSubmitting(true);
+      await logOut();
+      toast.success("Sign out successful");
+    } catch (error) {
+      console.log(error);
+      toast.error("An error happened while logging out.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    handleSignOut();
   }
 
-  return (
-    <div className="p-4 md:px-6 xl:px-8 py-6 sm:py-8 md:pt-12 md:pb-0 flex flex-col items-center">
-      <div className="w-full md:max-w-2xl xl:mr-[248px] space-y-4">
-        {user ? (
-          <div className="flex gap-3 items-center bg-background p-4 rounded-lg">
-            <div>
-              <Avatar className="w-16 h-16">
-                <AvatarImage src="" />
-                <AvatarFallback className="text-2xl">
-                  {user.displayName[0]}
-                </AvatarFallback>
-              </Avatar>
-            </div>
-            <div>
-              <h1 className="text-lg">{user?.displayName}</h1>
-              <p className="text-tertiary-foreground">{user?.email}</p>
-            </div>
-          </div>
-        ) : (
-          <Link to="/auth" className={buttonVariants({ variant: "default" })}>
-            Log In
-          </Link>
-        )}
+  async function handleAccountDeletion() {
+    try {
+      setIsSubmitting(true);
+      await deleteAccount(user);
+      toast.success("Account deleted successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("An error happened while deleting account.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
-        {user && (
-          <div>
-            <p className="mb-2 text-sm md:text-base font-medium text-primary">
-              Account
-            </p>
-            <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+ space-y-3">
-              <div className="flex flex-col gap-3">
-                <Link to="/change-password">
-                  <div className="w-full flex items-center justify-between">
-                    <p>Change Password</p>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
+  if (loading) {
+    return <SettingsSkeleton />;
+  } else {
+    return (
+      <div className="p-4 md:px-6 xl:px-8 py-6 sm:py-8 md:pt-12 md:pb-0 flex flex-col items-center">
+        <div className="w-full md:max-w-2xl xl:mr-[248px] space-y-4">
+          {user ? (
+            <div className="flex gap-3 items-center bg-background p-4 rounded-lg">
+              <div>
+                <Avatar className="w-16 h-16">
+                  <AvatarImage src="" />
+                  <AvatarFallback className="text-2xl">
+                    {user?.displayName?.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              <div>
+                <h1 className="text-lg">{user?.displayName}</h1>
+                <p className="text-tertiary-foreground">{user?.email}</p>
+              </div>
+            </div>
+          ) : (
+            <Link to="/auth" className={buttonVariants({ variant: "default" })}>
+              Log In
+            </Link>
+          )}
+
+          {user && (
+            <div>
+              <p className="mb-2 text-sm md:text-base font-medium text-primary">
+                Account
+              </p>
+              <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+ space-y-3">
+                <div className="flex flex-col gap-3">
+                  <Link to="/change-password">
+                    <div className="w-full flex items-center justify-between">
+                      <p>Change Password</p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                        />
+                      </svg>
+                    </div>
+                  </Link>
+                  <Separator />
+                  <div className="w-full flex flex-col gap-2">
+                    <p>Sign out of current device</p>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="secondary">Sign Out</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Sign Out</DialogTitle>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <Button
+                            type="submit"
+                            variant="secondary"
+                            onClick={handleSignOut}
+                          >
+                            {isSubmitting && (
+                              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                            )}
+                            Confirm
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </div>
-                </Link>
-                <Separator />
-                <div className="w-full flex flex-col gap-2">
-                  <p>Sign out of current device</p>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="secondary">Sign Out</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Sign Out</DialogTitle>
-                      </DialogHeader>
-                      <DialogFooter>
-                        <Button
-                          type="submit"
-                          variant="secondary"
-                          onClick={handleSignOut}
-                        >
-                          {isSubmitting && (
-                            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                          )}
-                          Confirm
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-                <Separator />
-                <div className="w-full flex flex-col gap-2">
-                  <p>Delete Account</p>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="secondary">Delete Account</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                        <DialogDescription>
-                          This action cannot be undone. Are you sure you want to
-                          permanently delete your account?
-                        </DialogDescription>
-                      </DialogHeader>
-                      <DialogFooter>
-                        <Button
-                          type="submit"
-                          variant="secondary"
-                          onClick={deleteAccount}
-                        >
-                          {isSubmitting && (
-                            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                          )}
-                          Delete
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
+                  <Separator />
+                  <div className="w-full flex flex-col gap-2">
+                    <p>Delete Account</p>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="secondary">Delete Account</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>
+                            Are you sure absolutely sure?
+                          </DialogTitle>
+                          <DialogDescription>
+                            This action cannot be undone. Are you sure you want
+                            to permanently delete your account?
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <Button
+                            type="submit"
+                            variant="secondary"
+                            onClick={handleAccountDeletion}
+                          >
+                            {isSubmitting && (
+                              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                            )}
+                            Delete
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div>
-          <p className="mb-2 text-sm md:text-base font-medium text-primary">
-            Appearance
-          </p>
-          <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
-            <div className="flex items-center justify-between">
-              <Label className="text-base">Theme</Label>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="text-primary text-sm">
-                  Change Theme
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => setTheme("light")}>
-                    Light
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    Dark
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("system")}>
-                    System
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </div>
-
-        {user && (
           <div>
             <p className="mb-2 text-sm md:text-base font-medium text-primary">
-              Notifications
+              Appearance
             </p>
             <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
               <div className="flex items-center justify-between">
-                <Label
-                  htmlFor="notifications-preferences"
-                  className="text-base"
-                >
-                  Turn of Notifications
-                </Label>
-                <Switch id="notifications-preferences" />
+                <Label className="text-base">Theme</Label>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="text-primary text-sm">
+                    Change Theme
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => setTheme("light")}>
+                      Light
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("dark")}>
+                      Dark
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("system")}>
+                      System
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           </div>
-        )}
 
-        {user && !isInstructor && (
+          {user && (
+            <div>
+              <p className="mb-2 text-sm md:text-base font-medium text-primary">
+                Notifications
+              </p>
+              <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
+                <div className="flex items-center justify-between">
+                  <Label
+                    htmlFor="notifications-preferences"
+                    className="text-base"
+                  >
+                    Turn of Notifications
+                  </Label>
+                  <Switch
+                    id="notifications-preferences"
+                    onCheckedChange={() => {
+                      toast.success("Notifications prefrence updated");
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {user && !isInstructor && (
+            <div>
+              <p className="mb-2 text-sm md:text-base font-medium text-primary">
+                Learning Reminders
+              </p>
+              <div className="p-4 rounded-lg bg-background text-sm flex flex-col gap-3 md:text-base lg:text-base+">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="reminders" className="text-base">
+                    Reminders
+                  </Label>
+                  <Switch id="reminders" />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="reminders" className="text-base">
+                    Time
+                  </Label>
+                  <Select
+                    onValueChange={() => toast.success("Learning reminders ON")}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Choose Time" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Time</SelectLabel>
+                        <SelectItem value="morning">06:00</SelectItem>
+                        <SelectItem value="mid-morning">09:00</SelectItem>
+                        <SelectItem value="noon">12:00</SelectItem>
+                        <SelectItem value="afternoon">15:00</SelectItem>
+                        <SelectItem value="evening">18:00</SelectItem>
+                        <SelectItem value="night">21:00</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div>
             <p className="mb-2 text-sm md:text-base font-medium text-primary">
-              Learning Reminders
+              Help
             </p>
-            <div className="p-4 rounded-lg bg-background text-sm flex flex-col gap-3 md:text-base lg:text-base+">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="reminders" className="text-base">
-                  Reminders
-                </Label>
-                <Switch id="reminders" />
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <Label htmlFor="reminders" className="text-base">
-                  Time
-                </Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Choose Time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Time</SelectLabel>
-                      <SelectItem value="morning">06:00</SelectItem>
-                      <SelectItem value="mid-morning">09:00</SelectItem>
-                      <SelectItem value="noon">12:00</SelectItem>
-                      <SelectItem value="afternoon">15:00</SelectItem>
-                      <SelectItem value="evening">18:00</SelectItem>
-                      <SelectItem value="night">21:00</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+            <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
+              <div className="flex flex-col gap-2">
+                <Link
+                  to="/help"
+                  className="hover:underline underline-offset-4 hover:text-primary"
+                >
+                  Help Center
+                </Link>
+                <Separator />
+                <Link
+                  to="/contact-us"
+                  className="hover:underline underline-offset-4 hover:text-primary"
+                >
+                  Contact Us
+                </Link>
+                <Separator />
+                <Link
+                  to="/terms"
+                  className="hover:underline underline-offset-4 hover:text-primary"
+                >
+                  Terms and Privacy Policy
+                </Link>
               </div>
             </div>
           </div>
-        )}
 
-        <div>
-          <p className="mb-2 text-sm md:text-base font-medium text-primary">
-            Help
-          </p>
-          <div className="p-4 rounded-lg bg-background text-sm md:text-base lg:text-base+">
-            <div className="flex flex-col gap-2">
-              <Link
-                to="/help"
-                className="hover:underline underline-offset-4 hover:text-primary"
-              >
-                Help Center
-              </Link>
-              <Separator />
-              <Link
-                to="/contact-us"
-                className="hover:underline underline-offset-4 hover:text-primary"
-              >
-                Contact Us
-              </Link>
-              <Separator />
-              <Link
-                to="/terms"
-                className="hover:underline underline-offset-4 hover:text-primary"
-              >
-                Terms and Privacy Policy
-              </Link>
-            </div>
-          </div>
+          <Button
+            variant="outline"
+            onClick={() =>
+              toast("Link copied successfully!", {
+                icon: "🔗",
+              })
+            }
+          >
+            Share App
+          </Button>
         </div>
-
-        <Button
-          variant="outline"
-          onClick={() =>
-            toast("Link copied successfully!", {
-              icon: "🔗",
-            })
-          }
-        >
-          Share App
-        </Button>
       </div>
-    </div>
-  );
+    );
+  }
 }

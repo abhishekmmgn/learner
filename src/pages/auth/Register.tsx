@@ -2,10 +2,20 @@ import RegistrationForm from "../../forms/RegisterForm";
 import AuthLeftPane from "../../components/AuthLeftPane";
 import { buttonVariants } from "../../components/ui/button";
 import { Link } from "react-router-dom";
+import GeneralSkeleton from "../../components/skeletons/GeneralSkeleton";
+import { useAuthContext } from "../../contexts/AuthProvider";
 
 export default function RegisterPage() {
-  return (
-    <>
+  const { loading } = useAuthContext();
+
+  if (loading) {
+    return (
+      <div>
+        <GeneralSkeleton />
+      </div>
+    );
+  } else {
+    return (
       <div className="container relative bg-background h-screen pt-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 md:pt-0">
         <AuthLeftPane />
         <div className="mx-auto flex w-full flex-col justify-center space-y-8 sm:w-[350px]">
@@ -42,6 +52,6 @@ export default function RegisterPage() {
           </p>
         </div>
       </div>
-    </>
-  );
+    );
+  }
 }

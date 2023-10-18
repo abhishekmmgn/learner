@@ -2,6 +2,7 @@ import TopicCard from "./TopicCard";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 export default function TopicCardGallery(props) {
+  const topic = [{title: "", photo: "", description: ""}]
   return (
     <div className="w-full">
       <div className="mb-3 flex items-center">
@@ -11,26 +12,14 @@ export default function TopicCardGallery(props) {
         <ChevronRightIcon className="w-5 h-5 sm:hidden" />
       </div>
       <div className="h-full flex flex-row gap-4 pr-4 overflow-visible overflow-x-scroll no-scrollbar">
-        <TopicCard
-          photo="https://source.unsplash.com/random"
-          topic="Life Sciences"
-        />
-        <TopicCard
-          photo="https://source.unsplash.com/random"
-          topic="Microbiology"
-        />
-        <TopicCard
-          photo="https://source.unsplash.com/random"
-          topic="Life Sciences"
-        />
-        <TopicCard
-          photo="https://source.unsplash.com/random"
-          topic="Microbiology"
-        />
-        <TopicCard
-          photo="https://source.unsplash.com/random"
-          topic="Life Sciences"
-        />
+        {/* {props.topics.map((topic, index) => (
+          <TopicCard
+            title={topic.title}
+            description={topic.description}
+            photo={topic.photo}
+            key={topic.index}
+          />
+        ))} */}
       </div>
     </div>
   );

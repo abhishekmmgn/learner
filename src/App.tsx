@@ -4,7 +4,6 @@ import Library from "./pages/Library";
 import Search from "./pages/Search";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
-import SearchResults from "./pages/SearchResults";
 import CourseDetails from "./pages/CourseDetails";
 import Courses from "./pages/Courses";
 import CreateCourse from "./pages/CreateCourse";
@@ -20,7 +19,6 @@ import { useAuthContext } from "./contexts/AuthProvider";
 export default function App() {
   const { user, isInstructor } = useAuthContext();
   console.log(user);
-  // console.log(isInstructor);
 
   return (
     <div className="h-screen">
@@ -38,19 +36,17 @@ export default function App() {
           {isInstructor ? (
             <>
               <Route index element={<Courses />} />
+              <Route path="course/:id" element={<CourseDetails />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/new" element={<CreateCourse />} />
             </>
           ) : (
             <>
               <Route index element={<Home />} />
+              <Route path="course/:id" element={<CourseDetails />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/library" element={<Library />} />
-              <Route path="course/:id" element={<CourseDetails />} />
-              <Route path="/search">
-                <Route index element={<Search />} />
-                <Route path="/search/:id" element={<SearchResults />} />
-              </Route>
+              <Route path="/search" element={<Search />} />
               <Route path="*" element={<NotFound />} />
             </>
           )}

@@ -10,6 +10,7 @@ export function AuthContextProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<null | object>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [isInstructor, setIsInstructor] = useState<boolean>(
     false || localStorage.getItem("isInstructor") === "true"
   );
@@ -17,6 +18,7 @@ export function AuthContextProvider({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
+      setLoading(false); 
     });
 
     return () => {
@@ -25,7 +27,9 @@ export function AuthContextProvider({
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isInstructor, setIsInstructor }}>
+    <AuthContext.Provider
+      value={{ user, loading, setLoading, isInstructor, setIsInstructor }}
+    >
       {children}
     </AuthContext.Provider>
   );

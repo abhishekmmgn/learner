@@ -7,17 +7,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Textarea } from "../components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { db, storage } from "../firebase-cofig";
-import {
-  collection,
-  doc,
-  addDoc,
-  updateDoc,
-  serverTimestamp,
-  arrayUnion,
-} from "firebase/firestore";
-import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { useAuthContext } from "../contexts/AuthProvider";
+import { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { createCourse } from "@/utils/Course";
+import { uploadFile } from "@/utils/UploadFile";
 
 const initialValues = {
   title: "",
@@ -52,6 +46,7 @@ const validationSchema = Yup.object({
 });
 
 export default function CreateCourseForm() {
+  const [imageURL, setImageURL] = useState("");
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
@@ -82,57 +77,40 @@ export default function CreateCourseForm() {
         instructor: user.displayName,
         students: 0,
       };
-
-      try {
-        const courseRef = await addDoc(collection(db, "courses"), {
-          ...data,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
+      createCourse(data)
+        .then(() => {
+          toast.success("Course created successfully");
+          actions.resetForm();
+          setImageURL("");
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("An error happened while creating the course.");
         });
-
-        // Get the newly created course's ID
-        const courseId = courseRef.id;
-
-        // Add the course to the instructor's courses collection
-        const userCoursesDocRef = doc(db, "users", user.uid);
-        await updateDoc(userCoursesDocRef, {
-          courses: arrayUnion(courseId),
-        });
-
-        toast.success("Course created successfully");
-        
-        actions.resetForm();
-
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } 
-      catch (error) {
-        toast.error("Course creation failed");
-        console.error(error);
-      }
     },
   });
-
   async function handleImageUpload(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const file = (e.target as HTMLInputElement).files[0];
-    if (file) {
-      const storageRef = await ref(
-        storage,
-        `courses/${Date.now()}-${file.name}`
-      );
-      try {
-        await uploadBytes(storageRef, file); // Upload the file to Firebase Storage
-
-        // Get the download URL
-        const downloadURL = await getDownloadURL(storageRef);
-        values.image = downloadURL;
-      } catch (error) {
-        console.error("Error uploading the file:", error);
+    toast.promise(
+      uploadFile(file)
+        .then((url) => {
+          values.image = url;
+          setImageURL(values.image);
+        })
+        .catch((error) => {
+          console.log(error);
+        }),
+      {
+        loading: "Uploading...",
+        success: <b>Uploaded</b>,
+        error: <b>Something bad happened.</b>,
       }
-    }
+    );
   }
 
   return (
@@ -141,7 +119,7 @@ export default function CreateCourseForm() {
         <div className="grid gap-4">
           <div className="flex flex-col items-center gap-2">
             <img
-              src={values.image}
+              src={imageURL}
               alt="Cover Image"
               className="w-full aspect-video bg-background"
             />

@@ -1,17 +1,11 @@
+import { Link } from "react-router-dom";
 
-export default function SuggestionCard(props) {
+export default function SuggestionCard({ title }: { title: string }) {
   return (
-    <div className="relative aspect-video rounded-lg">
-      <img
-        src={props.photo}
-        alt="Topic Photo"
-        className="absolute inset-y-0 inset-x-0 bg-background w-full object-cover aspect-video rounded-lg"
-        loading="lazy"
-      />
-      <div className="absolute inset-y-0 inset-x-0 bg-black/25 w-full object-cover aspect-video rounded-lg hover:bg-black/30"></div>
-      <p className="absolute bottom-3 left-3 text-white text-base md:text-lg line-clamp-1">
-        {props.topic}
-      </p>
-    </div>
+    <Link to={`/search/${title}`} >
+      <div className="mx-auto border-b-2 py-2 h-11 w-full">
+        <p className="overflow-clip line-clamp-1 lg:text-lg">{title}</p>
+      </div>
+    </Link>
   );
 }

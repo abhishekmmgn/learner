@@ -6,16 +6,21 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeProvider.tsx";
 import { AuthContextProvider } from "./contexts/AuthProvider";
 import { AlertsProvider } from "./contexts/AlertsProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <AuthContextProvider>
-        <BrowserRouter>
-          <AlertsProvider />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <AuthContextProvider>
+          <BrowserRouter>
+            <AlertsProvider />
             <App />
-        </BrowserRouter>
-      </AuthContextProvider>
-    </ThemeProvider>
+          </BrowserRouter>
+        </AuthContextProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

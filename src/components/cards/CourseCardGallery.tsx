@@ -1,9 +1,8 @@
 import { ChevronRightIcon } from "@radix-ui/react-icons";
-import CourseCard from "./CourseCard";
-import EnrolledCourseCard from "./EnrolledCourseCard";
+import { CourseCard, EnrolledCourseCard } from "./CourseCard";
 
 function CourseCardGallery(props) {
-  const photo = "https://picsum.photos/340/132";
+  const courses = [];
   return (
     <div className="w-full">
       <div className="mb-3 flex items-center">
@@ -14,57 +13,25 @@ function CourseCardGallery(props) {
       </div>
 
       <div className="h-full flex flex-row gap-4 pr-4 overflow-visible overflow-x-scroll no-scrollbar">
-        {props.enrolled ? (
-          <>
+        {/* {props.enrolled ? (
+          {courses.map((course, index) => (
             <EnrolledCourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              progress={30}
-              photo="https://source.unsplash.com/random"
+              title={course.title}
+              progress={course.progress}
+              photo={course.photo}
+              key={course.index}
             />
-            <EnrolledCourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              progress={0}
-              photo="https://source.unsplash.com/random"
-            />
-            <EnrolledCourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              progress={56}
-              photo="https://source.unsplash.com/random"
-            />
-            <EnrolledCourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              progress={89}
-              photo="https://source.unsplash.com/random"
-            />
-          </>
+          ))}
         ) : (
-          <>
+          {courses.map((course, index) => (
             <CourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              photo="https://source.unsplash.com/random"
+              title={course.title}
+              progress={course.progress}
+              photo={course.photo}
+              key={course.index}
             />
-            <CourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              photo="https://source.unsplash.com/random"
-            />
-            <CourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              photo="https://source.unsplash.com/random"
-            />
-            <CourseCard
-              title="Introduction to Python with google tekdfs jkkjfdskjdfsk jkjfdkj fdkjfdkjkjdfkjfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-              level="Beginner"
-              photo="https://source.unsplash.com/random"
-            />
-          </>
-        )}
+          ))}
+        )} */}
       </div>
     </div>
   );

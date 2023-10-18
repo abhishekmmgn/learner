@@ -11,7 +11,6 @@ import { updateProfile } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthProvider";
-import { useState } from "react";
 import toast from "react-hot-toast";
 
 const initialValues = {
@@ -33,7 +32,6 @@ const validationSchema = Yup.object({
 });
 
 export default function CreateProfileForm() {
-  const [success, setSuccess] = useState<boolean>(false);
   const navigate = useNavigate();
   const { user, setIsInstructor } = useAuthContext();
 
@@ -60,33 +58,28 @@ export default function CreateProfileForm() {
       const profile = {
         bio: values.bio,
         isInstructor: values.isInstructor,
+        recieveNotifications: true,
       };
 
-      const docRef = doc(db, "users", user.uid);
       try {
+        const docRef = doc(db, "users", user.uid);
         await setDoc(docRef, profile);
+
+        if (values.isInstructor) {
+          localStorage.setItem("isInstructor", `true`);
+        }
+        setIsInstructor(values.isInstructor);
+
         toast.success("Profile created successfully");
-        setSuccess(true);
+        actions.resetForm();
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       } catch (error) {
         console.log(error);
         toast.error("Something went wrong");
       }
-
-      if (values.isInstructor) {
-        localStorage.setItem("isInstructor", `true`);
-      }
-      setIsInstructor(values.isInstructor);
-
-      actions.resetForm();
-
-      toast.success(`${success}`);
-      
-      if (success) {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      }
-      toast.success(`${success}`);
     },
   });
   return (

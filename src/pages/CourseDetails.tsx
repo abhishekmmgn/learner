@@ -1,87 +1,179 @@
 import { Button } from "../components/ui/button";
 import Back from "../components/Back";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthContext } from "../contexts/AuthProvider";
+import GeneralSkeleton from "../components/skeletons/GeneralSkeleton";
+import { getCourse, enrollCourse } from "../utils/Course";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { CourseType } from "../types/CourseType";
+import toast from "react-hot-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "../components/ui/dialog";
+import { deleteCourse } from "../utils/Course";
 
 export default function CourseDetails(props) {
-  const [enrolled, setEnrolled] = useState(true);
-  return (
-    <>
-      <Back />
-      <div className="lg:my-10 flex flex-col lg:flex-row h-min gap-5 items-stretch">
-        <img
-          src="https://source.unsplash.com/random"
-          alt="Course Photo"
-          className="w-full aspect-video bg-gray-light-500 lg:ml-8 lg:max-w-sm "
-        />
+  const [enrolled, setEnrolled] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-        <div className="flex flex-col items-center justify-between lg:items-start px-4 lg:mr-8 md:px-8 mb-8 lg:mb-0 lg:w/2/3">
-          <div>
-            <h1 className="text-xl font-semibold line-clamp-2 md:text-2xl">
-              Principles Of Discrete Applied Mathematics
-            </h1>
-            <p className="mt-2 mb-5 text-tertiary-foreground line-clamp-5 md:line-clamp-[10] lg:text-lg md:mb-4">
-              This course is an introduction to discrete applied mathematics.
-              Topics include probability, counting, linear programming,
-              number-theoretic algorithms, sorting, data compression, and
-              error-correcting codes. This is a Communication Intensive in the
-              Major CI-M course, and thus includes a writing component
-            </p>
-          </div>
-          <div className="w-full md:max-w-sm">
-            {enrolled ? (
-              <Button variant="outline">Unenroll</Button>
-            ) : (
-              <Button>Enroll</Button>
-            )}
+  const location = useLocation();
+  const { user, loading, isInstructor } = useAuthContext();
+  const [course, setCourse] = useState<CourseType>({
+    title: "",
+    description: "",
+    image: "",
+    duration: "",
+    topics: "",
+    audio: "",
+    subtitles: "",
+    attachments: [],
+    instructorId: "",
+    instructor: "",
+    students: 0,
+  });
+
+  const id = location.pathname.split("/")[2];
+  useEffect(() => {
+    getCourse(id)
+      .then((course) => {
+        setCourse(course);
+      })
+      .catch((error) => {
+        toast.error("Something went wrong");
+      });
+  }, []);
+
+  function handleCourseEnroll() {
+    enrollCourse(id);
+    setEnrolled(true);
+  }
+
+  function handleCourseDelete() {
+    deleteCourse(id);
+    toast.success("Course deleted successfully");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  }
+
+  if (loading) {
+    return <GeneralSkeleton />;
+  }
+  if (enrolled) {
+    return (
+      <>
+        <Back />
+        <div className="flex flex-col items-center gap-6 pb-4 md:py-8">
+          <img
+            src={course?.image}
+            alt="Course Photo"
+            className="w-full aspect-video bg-secondary max-w-4xl"
+          />
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Back />
+        <div className="flex flex-col items-center gap-6 pb-4 md:py-8">
+          <img
+            src={course?.image}
+            alt="Course Photo"
+            className="w-full aspect-video bg-secondary max-w-4xl"
+          />
+          <div className="w-full max-w-4xl px-4 md:px-6 xl:px-0 space-y-6 xl:space-y-8">
+            <div className="space-y-6">
+              <div className="w-full">
+                <h1 className="text-xl font-semibold line-clamp-2 md:text-2xl">
+                  {course?.title}
+                </h1>
+                <p className="mt-1 text-tertiary-foreground line-clamp-5 md:line-clamp-3">
+                  {course?.description}
+                </p>
+              </div>
+              <div className="w-full md:max-w-xl mx-auto">
+                {isInstructor && (
+                  <div className="space-y-3">
+                    <Button variant="secondary">Edit Course</Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="destructive">Delete Course</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Delete Course</DialogTitle>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <Button
+                            type="submit"
+                            variant="secondary"
+                            onClick={handleCourseDelete}
+                          >
+                            Confirm
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                )}
+                {!isInstructor && !enrolled && (
+                  <Button onClick={handleCourseEnroll}>Enroll</Button>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {/* Syllabus */}
+              <div>
+                <p className="mb-3 md:text-lg font-medium">Syllabus</p>
+                <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+"></div>
+              </div>
+
+              {/* Information */}
+              <div>
+                <p className="mb-3 md:text-lg font-medium">Information</p>
+                <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+">
+                  <p>Duration</p>
+                  <p className="mb-3 text-tertiary-foreground">
+                    {course?.duration}
+                  </p>
+                  <p>Topics</p>
+                  <p className="mb-3 text-tertiary-foreground">
+                    {course?.topics}
+                  </p>
+                  <p>Instructor</p>
+                  <p className="mb-3 text-tertiary-foreground">
+                    {course?.instructor}
+                  </p>
+                  <p>Students</p>
+                  <p className="text-tertiary-foreground">{course?.students}</p>
+                </div>
+              </div>
+
+              {/* Language */}
+              <div>
+                <p className="mb-3 md:text-lg font-medium">Languages</p>
+                <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+">
+                  <p>Audio</p>
+                  <p className="mb-3 text-tertiary-foreground">
+                    {course?.audio}
+                  </p>
+                  <p>Subtitles</p>
+                  <p className="mb-3 text-tertiary-foreground">
+                    {course?.subtitles}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="pb-4 px-4 md:px-8 md:pb-8 space-y-6">
-        {/* Syllabus */}
-        <div>
-          <p className="mb-3 md:text-lg font-medium">Syllabus</p>
-          <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+"></div>
-        </div>
-
-        {/* Information */}
-        <div>
-          <p className="mb-3 md:text-lg font-medium">Information</p>
-          <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+">
-            <p>Level</p>
-            <p className="mb-3 text-tertiary-foreground">Intermediate</p>
-            <p>Duration</p>
-            <p className="mb-3 text-tertiary-foreground">2 months</p>
-            <p>Topics</p>
-            <p className="mb-3 text-tertiary-foreground">
-              Mathematics: Applied Mathematics, Discrete Mathematics,
-              Probability and Statistics, Social Science: Communication
-            </p>
-            <p>Instructor</p>
-            <p className="mb-3 text-tertiary-foreground">
-              Prof. Michel Goemans, Susan Ruff, Dr. Lorenzo Orecchia, Dr.
-              Richard Peng
-            </p>
-            <p>Students</p>
-            <p className="text-tertiary-foreground">120K</p>
-          </div>
-        </div>
-
-        {/* Language */}
-        <div>
-          <p className="mb-3 md:text-lg font-medium">Languages</p>
-          <div className="p-4 rounded-lg bg-background text-sm+ md:text-base lg:text-base+">
-            <p>Audio</p>
-            <p className="mb-3 text-tertiary-foreground">
-              English, Spanish, Hindi
-            </p>
-            <p>Subtitles</p>
-            <p className="mb-3 text-tertiary-foreground">
-              English, Hindi, Spanish, French, Korean Chinese, etc
-            </p>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }

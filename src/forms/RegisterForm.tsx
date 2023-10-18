@@ -56,6 +56,9 @@ export default function RegistrationForm() {
           // Signed up
           const user = userCredential.user;
           // ...
+          setTimeout(() => {
+            navigate("/create-profile");
+          }, 1000);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -65,12 +68,6 @@ export default function RegistrationForm() {
         });
 
       actions.resetForm();
-
-      if (user) {
-        setTimeout(() => {
-          navigate("/create-profile");
-        }, 1000);
-      }
     },
   });
 
