@@ -10,7 +10,7 @@ export default function CreateCourse() {
   if (loading) {
     return <GeneralSkeleton />;
   }
-  
+
   if (user) {
     return (
       <div className="px-4 pt-6 pb-2 flex flex-col items-center sm:py-8 md:py-10 lg:pt-12 md:pb-0 md:px-6 lg:px-0">

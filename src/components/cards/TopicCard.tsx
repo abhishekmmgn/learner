@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
 
-export default function Topic(props) {
+type PropsType = {
+  title: string;
+};
+export default function Topic(props: PropsType) {
   return (
-    <Link to={`/search/topic/${props.topic}`}>
-      <div className="relative aspect-video rounded-lg min-w-[calc(100%-32px)] max-w-sm sm:min-w-[320px]">
-        <img
-          src={props.photo}
-          alt="Topic Photo"
-          className="absolute inset-y-0 inset-x-0 bg-secondary w-full object-cover aspect-video rounded-lg"
-          loading="lazy"
-        />
-        <div className="absolute inset-y-0 inset-x-0 bg-black/25 w-full object-cover aspect-video rounded-lg hover:bg-black/30"></div>
-        <p className="absolute bottom-3 left-3 text-white text-base md:text-lg line-clamp-1">
-          {props.topic}
+    <Link to={`/search?query=${props.title}`}>
+      <div className="w-36 max-w-48 h-10 bg-tertiary hover:bg-accent rounded-lg max-w-sm flex items-center justify-center shadow-sm">
+        <p className="text-tertiary-foreground line-clamp-1">
+          {props.title}
         </p>
       </div>
     </Link>

@@ -3,9 +3,9 @@ export type CourseType = {
   description: string;
   image: string;
   duration: string;
-  topics: string;
-  audio: string;
-  subtitles: string;
+  topics: Array<string>;
+  audio: Array<string>;
+  subtitles: Array<string>;
   attachments?: Array<string>;
   instructorId: string;
   instructor: string;

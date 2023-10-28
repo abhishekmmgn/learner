@@ -3,16 +3,15 @@ import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { db } from "../firebase-cofig";
 import { doc, getDoc, collection } from "firebase/firestore";
-import { useState, useEffect } from "react";
 import { useAuthContext } from "../contexts/AuthProvider";
 import { Separator } from "../components/ui/separator";
 import { CourseCardSkeleton } from "../components/skeletons/CourseCardSkeleton";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Courses() {
-  const { user, loading } = useAuthContext();
-  const [courses, setCourses] = useState<object>([]);
+  const { user } = useAuthContext();
 
-  useEffect(() => {
+  const { isLoading, data } = useQuery("courses", () => {
     const getCourse = async () => {
       const docRef = await doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
@@ -39,11 +38,11 @@ export default function Courses() {
       }
     };
     user && getCourse();
-  }, []);
+  });
   console.log("User: ", user?.uid);
-  console.log(courses);
+  console.log("Data: ", data);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="w-full xl:max-w-6xl flex flex-wrap items-center justify-center md:grid gap-4 lg:grid-cols-2 xl:grid-cols-3 px-4 py-10 md:pl-6 lg:pl-8">
         <CourseCardSkeleton />
@@ -56,7 +55,7 @@ export default function Courses() {
     );
   }
 
-  if (courses?.length > 0) {
+  if (data?.data > 0) {
     return (
       <div className="px-4 py-6 space-y-6 md:pl-6 xl:pl-8 sm:py-8 md:py-10 lg:pt-12 md:pb-0">
         <div className="space-y-4">
@@ -85,24 +84,8 @@ export default function Courses() {
             Your Courses
           </h1>
           <div className="w-full xl:max-w-6xl flex flex-col items-center md:grid gap-4 lg:grid-cols-2 md:gap-6 xl:grid-cols-3">
-            {courses.map((course: any) => (
-              <>
-                <InstructorCourseCard
-                  key={course.id}
-                  courseId={course}
-                  title="Hello world"
-                />
-                <InstructorCourseCard
-                  key={course.id}
-                  courseId={course}
-                  title="Hello world"
-                />
-                <InstructorCourseCard
-                  key={course.id}
-                  courseId={course}
-                  title="Hello world"
-                />
-              </>
+            {data?.data.map((course: any) => (
+              <p>Data is this</p>
             ))}
           </div>
         </div>
@@ -116,7 +99,7 @@ export default function Courses() {
             You don't have any courses.
           </h1>
           <p className="text-center font-medium text-secondary-foreground text-base">
-            Create any course.
+            Create a new course.
           </p>
         </div>
         <Link to="/new" className="w-full max-w-md sm:max-w-sm">

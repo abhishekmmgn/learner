@@ -19,7 +19,7 @@ import { useAuthContext } from "./contexts/AuthProvider";
 export default function App() {
   const { user, isInstructor } = useAuthContext();
   console.log(user);
-
+  
   return (
     <div className="h-screen">
       <Routes>

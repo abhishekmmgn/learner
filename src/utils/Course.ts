@@ -8,9 +8,12 @@ import {
   deleteDoc,
   collection,
   updateDoc,
+  query,
+  where,
   serverTimestamp,
   arrayUnion,
-  arrayRemove
+  arrayRemove,
+  FieldValue,
 } from "firebase/firestore";
 import { ref, deleteObject, listAll } from "firebase/storage";
 import { CourseType } from "../types/CourseType";
@@ -52,14 +55,44 @@ async function getCourse(courseId: string) {
   }
 }
 
-import { FieldValue } from "firebase/firestore";
+async function getCourses() {
+  try {
+    const courseRef = collection(db, "courses");
+    const courseSnap = await getDocs(courseRef);
+    const courses = courseSnap.docs.map((doc) => ({
+      ...doc.data(),
+      courseId: doc.id,
+    }));
+    return courses;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getCoursesByTopics(topic: Array<string>) {
+  try {
+    // capitalize the first letter of each topic
+    topic = topic.map((topic) => topic.charAt(0).toUpperCase() + topic.slice(1));
+    const courseRef = collection(db, "courses");
+    const q = query(courseRef, where('topics', 'array-contains-any', topic));
+
+    const courseSnap = await getDocs(q);
+    const courses = courseSnap.docs.map((doc) => ({
+      ...doc.data(),
+      courseId: doc.id,
+    }));
+    return courses;
+  } catch (error) {
+    return error;
+  }
+}
 
 async function enrollCourse(courseId: string) {
   try {
     // Add the course to the user's enrolled courses collection
     const userCoursesDocRef = doc(db, "users", auth.currentUser.uid);
     await updateDoc(userCoursesDocRef, {
-      enrolledCourses: arrayUnion({courseId: courseId, progress: 0}),
+      enrolledCourses: arrayUnion({ courseId: courseId, progress: 0 }),
     });
   } catch (error) {
     return error;
@@ -78,13 +111,12 @@ async function editCourse(courseId: string) {
 async function deleteCourse(courseId: string) {
   try {
     // Delete the course's image from the storage
-    const imageRef = ref(storage, `courses/${auth.currentUser?.uid}/${courseId}`);
-    deleteObject(imageRef)
-      .then(() => {
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const imageRef = ref(
+      storage,
+      `courses/${auth.currentUser?.uid}/${courseId}`
+    );
+    deleteObject(imageRef);
+    deleteObject(imageRef);
 
     // Delete the course from the courses collection
     const courseDocRef = doc(db, "courses", courseId);
@@ -122,7 +154,6 @@ async function deleteAllCourses() {
   }
 }
 
-
 async function searchCourses(searchText: string) {
   const courses = [];
   try {
@@ -131,7 +162,7 @@ async function searchCourses(searchText: string) {
     for (const doc of docSnap.docs) {
       const title: string = doc.data().title;
       if (title.includes(searchText)) {
-        courses.push({...doc.data(), courseId: doc.id});
+        courses.push({ ...doc.data(), courseId: doc.id });
       }
     }
     return courses;
@@ -146,7 +177,9 @@ export {
   enrollCourse,
   editCourse,
   getCourse,
+  getCourses,
+  getCoursesByTopics,
   deleteCourse,
   deleteAllCourses,
-  searchCourses
+  searchCourses,
 };

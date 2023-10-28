@@ -18,25 +18,25 @@ const initialValues = {
   description: "",
   image: "",
   duration: "",
-  topics: "",
+  topics: [],
   audio: "",
   subtitles: "",
 };
 
 const validationSchema = Yup.object({
   title: Yup.string()
-    .min(10, "Title should be atleast 5 characters long")
-    .max(28, "Title should be less than 28 characters")
+    .min(5, "Title should be atleast 5 characters long")
+    .max(48, "Title should be less than 48 characters")
     .required("Required"),
   description: Yup.string()
     .min(20, "Title should be atleast 20 characters long")
-    .max(128, "Title should be less than 128 characters")
+    .max(512, "Title should be less than 512 characters")
     .required("Required"),
   image: Yup.string().required("Required"),
   duration: Yup.string().required("Required"),
-  topics: Yup.string().required("Required"),
-  audio: Yup.string().required("Required"),
-  subtitles: Yup.string().required("Required"),
+  topics: Yup.array().required("Required"),
+  audio: Yup.array().required("Required"),
+  subtitles: Yup.array().required("Required"),
   attachments: Yup.array().of(
     Yup.object({
       name: Yup.string().required("Required"),
@@ -92,15 +92,19 @@ export default function CreateCourseForm() {
         });
     },
   });
-  async function handleImageUpload(
+  function handleImageUpload(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const file = (e.target as HTMLInputElement).files[0];
     toast.promise(
       uploadFile(file)
         .then((url) => {
-          values.image = url;
-          setImageURL(values.image);
+          if (url) {
+            values.image = url.toString();
+            setImageURL(values.image);
+          } else {
+            console.log("URL not found.")
+          }
         })
         .catch((error) => {
           console.log(error);

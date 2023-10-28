@@ -1,8 +1,20 @@
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { CourseCard, EnrolledCourseCard } from "./CourseCard";
 
-function CourseCardGallery(props) {
-  const courses = [];
+type PropsType = {
+  title: string;
+  enrolled: boolean;
+  progress?: number;
+  courses: {
+    title: string;
+    image: string;
+    students: number;
+    instructor: string;
+    duration: string;
+    courseId: string;
+  }[];
+};
+function CourseCardGallery(props: PropsType) {
   return (
     <div className="w-full">
       <div className="mb-3 flex items-center">
@@ -12,27 +24,29 @@ function CourseCardGallery(props) {
         <ChevronRightIcon className="w-5 h-5 sm:hidden" />
       </div>
 
-      <div className="h-full flex flex-row gap-4 pr-4 overflow-visible overflow-x-scroll no-scrollbar">
-        {/* {props.enrolled ? (
-          {courses.map((course, index) => (
+      {/* <div className="h-full flex flex-row gap-4 pr-4 overflow-visible overflow-x-scroll no-scrollbar">
+        {props.enrolled ? (
+          {props.courses?.map((course, index) => (
             <EnrolledCourseCard
               title={course.title}
-              progress={course.progress}
-              photo={course.photo}
-              key={course.index}
+              progress={props.progress}
+              image={course.image}
+              key={index}
             />
           ))}
         ) : (
-          {courses.map((course, index) => (
-            <CourseCard
-              title={course.title}
-              progress={course.progress}
-              photo={course.photo}
-              key={course.index}
-            />
-          ))}
-        )} */}
-      </div>
+        {props.courses?.map((course, index) => (
+          <CourseCard
+            title={course.title}
+            duration={course.duration}
+            students={course.students}
+            instructor={course.instructor}
+            image={course.image}
+            key={index}
+          />
+        ))}
+        )}
+      </div> */}
     </div>
   );
 }

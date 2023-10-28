@@ -51,21 +51,17 @@ export default function RegistrationForm() {
     onSubmit: async (values, actions) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      createUserWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-          // ...
-          setTimeout(() => {
-            navigate("/create-profile");
-          }, 1000);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-          setError(errorMessage);
-        });
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+        const user = userCredential.user;
+        setTimeout(() => {
+          navigate("/create-profile");
+        }, 1000);
+      } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      }
 
       actions.resetForm();
     },

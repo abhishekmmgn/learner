@@ -53,20 +53,20 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="z-50 hidden fixed inset-y-0 h-full border-r bg-background backdrop-filter backdrop-blur-xl bg-opacity-90 py-2 px-3 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col gap-2">
+    <div className="z-50 hidden fixed inset-y-0 h-full border-r bg-secondary backdrop-filter backdrop-blur-xl bg-opacity-90 py-2 px-3 w-[210px] lg:w-[232px] xl:w-[248px] md:flex flex-col gap-2">
       <h1 className="mt-2 h-11 text-xl pl-2 pt-1 lg:pt-0 font-medium w-full">
         Learner
       </h1>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
         {isInstructor
           ? instructorTabs.map((tab, index) => (
               <Link
                 to={tab.path}
-                className={`flex items-center gap-2 px-2 py-1 rounded-lg ${
+                className={`flex items-center gap-2 h-10 px-2 py-1 rounded-lg ${
                   location.pathname === tab.path ||
                   location.pathname.startsWith(`${tab.path}/`)
-                    ? "bg-secondary text-primary"
-                    : "hover:bg-secondary"
+                    ? "bg-tertiary text-primary"
+                    : "hover:bg-tertiary"
                 }`}
                 key={index}
               >
@@ -77,11 +77,11 @@ export default function Sidebar() {
           : defaultTabs.map((tab, index) => (
               <Link
                 to={tab.path}
-                className={`flex items-center gap-2 px-2 py-1 rounded-lg ${
+                className={`flex items-center gap-2 h-10 px-2 py-1 rounded-lg ${
                   location.pathname === tab.path ||
                   location.pathname.startsWith(`${tab.path}/`)
-                    ? "bg-secondary text-primary"
-                    : "hover:bg-secondary"
+                    ? "bg-tertiary text-primary"
+                    : "hover:bg-tertiary"
                 }`}
                 key={index}
               >
