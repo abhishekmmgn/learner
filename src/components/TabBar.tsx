@@ -16,45 +16,45 @@ export default function TabBar() {
     {
       name: "Discover",
       path: "/",
-      icon: <HomeIcon className="w-5 h-5" />,
+      icon: <HomeIcon className="w-5 h-5" aria-label="Discover"  />,
     },
     {
       name: "Library",
       path: "/library",
-      icon: <BookmarkIcon className="w-5 h-5" />,
+      icon: <BookmarkIcon className="w-5 h-5" aria-label="Library"  />,
     },
     {
       name: "Search",
       path: "/search",
-      icon: <MagnifyingGlassIcon className="w-5 h-5" />,
+      icon: <MagnifyingGlassIcon className="w-5 h-5" aria-label="Search" />,
     },
     {
       name: "Settings",
       path: "/settings",
-      icon: <GearIcon className="w-5 h-5" />,
+      icon: <GearIcon className="w-5 h-5" aria-label="Settings" />,
     },
   ];
   const instructorTabs = [
     {
       name: "Courses",
       path: "/",
-      icon: <HomeIcon className="w-5 h-5" />,
+      icon: <HomeIcon className="w-5 h-5" aria-label="My Courses" />,
     },
     {
       name: "New Course",
       path: "/new",
-      icon: <Pencil1Icon className="w-5 h-5" />,
+      icon: <Pencil1Icon className="w-5 h-5" aria-label="New Course" />,
     },
     {
       name: "Settings",
       path: "/settings",
-      icon: <GearIcon className="w-5 h-5" />,
+      icon: <GearIcon className="w-5 h-5" aria-label="Settings" />,
     },
   ];
 
   return (
     <div
-      className={`fixed px-4 border-t bg-tertiary backdrop-filter backdrop-blur-xl bg-opacity-90 z-[45] inset-x-0 bottom-0 w-full h-[52px] pb-1 flex items-center md:hidden`}
+      className={`fixed px-4 border-t bg-secondary backdrop-filter backdrop-blur-xl bg-opacity-90 z-[45] inset-x-0 bottom-0 w-full h-[52px] pb-1 flex items-center md:hidden`}
     >
       {isInstructor
         ? instructorTabs.map((tab, index) => (

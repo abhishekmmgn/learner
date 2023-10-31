@@ -5,7 +5,7 @@ import Search from "./pages/Search";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import CourseDetails from "./pages/CourseDetails";
-import Courses from "./pages/Courses";
+import MyCourses from "./pages/MyCourses";
 import CreateCourse from "./pages/CreateCourse";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/Login";
@@ -35,7 +35,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           {isInstructor ? (
             <>
-              <Route index element={<Courses />} />
+              <Route index element={<MyCourses />} />
               <Route path="course/:id" element={<CourseDetails />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/new" element={<CreateCourse />} />

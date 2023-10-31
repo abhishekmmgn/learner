@@ -11,3 +11,10 @@ export type CourseType = {
   instructor: string;
   students: number;
 };
+
+export type enrolledCourseType = {
+  title: string;
+  image?: string;
+  progress: number;
+  courseId: string;
+};

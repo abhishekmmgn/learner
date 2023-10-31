@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Filter() {
+export default function Sort() {
   return (
     <Select>
       <SelectTrigger className="w-[180px]">

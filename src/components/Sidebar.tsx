@@ -16,39 +16,39 @@ export default function Sidebar() {
     {
       name: "Discover",
       path: "/",
-      icon: <HomeIcon className="w-5 h-5" />,
+      icon: <HomeIcon className="w-5 h-5" aria-label="Discover" />,
     },
     {
       name: "Library",
       path: "/library",
-      icon: <BookmarkIcon className="w-5 h-5" />,
+      icon: <BookmarkIcon className="w-5 h-5" aria-label="Library" />,
     },
     {
       name: "Search",
       path: "/search",
-      icon: <MagnifyingGlassIcon className="w-5 h-5" />,
+      icon: <MagnifyingGlassIcon className="w-5 h-5" aria-label="Search" />,
     },
     {
       name: "Settings",
       path: "/settings",
-      icon: <GearIcon className="w-5 h-5" />,
+      icon: <GearIcon className="w-5 h-5" aria-label="Settings" />,
     },
   ];
   const instructorTabs = [
     {
       name: "Courses",
       path: "/",
-      icon: <HomeIcon className="w-5 h-5" />,
+      icon: <HomeIcon className="w-5 h-5" aria-label="My courses" />,
     },
     {
       name: "New Course",
       path: "/new",
-      icon: <Pencil1Icon className="w-5 h-5" />,
+      icon: <Pencil1Icon className="w-5 h-5" aria-label="New Course" />,
     },
     {
       name: "Settings",
       path: "/settings",
-      icon: <GearIcon className="w-5 h-5" />,
+      icon: <GearIcon className="w-5 h-5" aria-label="Settings" />,
     },
   ];
 

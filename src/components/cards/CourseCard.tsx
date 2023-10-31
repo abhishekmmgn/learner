@@ -1,127 +1,106 @@
 import { Link } from "react-router-dom";
 import { Progress } from "../ui/progress";
 
-export function CourseCard(
-  image: string,
-  title: string,
-  students: number,
-  instructor: string,
-  duration: string,
-  courseId: string
-) {
+type courseCardProps = {
+  image?: string;
+  title: string;
+  students: number;
+  instructor: string;
+  duration: string;
+  courseId: string;
+};
+export function CourseCard(props: courseCardProps) {
   return (
-    <Link to={`/course/${courseId}`}>
-      <div className="min-w-[calc(100%-32px)] w-full max-w-sm flex flex-col bg-background rounded-lg sm:min-w-[360px] sm:max-w-sm">
+    <Link
+      to={`/course/${props.courseId}`}
+      className="mx-auto w-full max-w-md flex flex-col bg-background rounded-lg shadow-sm"
+    >
+      {props.image && (
         <img
-          src={image}
+          src={props.image}
           alt="Course Photo"
-          className="bg-secondary object-cover aspect-video rounded-t-lg"
+          className="bg-tertiary/80 object-cover aspect-video rounded-t-lg"
           loading="lazy"
         />
-        <div className="h-40 flex flex-col justify-center px-3 w-full overflow-clip">
-          <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
-            {title}
-          </h1>
-          <div>
-            <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
-              Students: {students}
-            </p>
-            <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
-              Instructors: {instructor}
-            </p>
-            <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
-              Duration: {duration}
-            </p>
-          </div>
+      )}
+      <div className="h-32 flex flex-col justify-center px-3 w-full overflow-clip">
+        <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
+          {props.title}
+        </h1>
+        <div>
+          <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
+            Students: {props.students}
+          </p>
+          <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
+            Instructors: {props.instructor}
+          </p>
+          <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
+            Duration: {props.duration}
+          </p>
         </div>
       </div>
     </Link>
   );
 }
 
-export function StretchedCourseCard(
-  image: string,
-  title: string,
-  students: number,
-  instructor: string,
-  duration: string,
-  courseId: string
-) {
+type enrolledCourseCardProps = {
+  image?: string;
+  title: string;
+  progress: number;
+  courseId: string;
+};
+export function EnrolledCourseCard(props: enrolledCourseCardProps) {
   return (
-    <Link to={`/course/${courseId}`}>
-      <div className="w-full flex bg-background rounded-lg">
+    <Link
+      to={`/course/${props.courseId}`}
+      className="min-w-[calc(100%-32px)] w-full max-w-sm flex flex-col bg-background rounded-lg sm:min-w-[360px] sm:max-w-sm shadow-sm"
+    >
+      {props.image && (
         <img
-          src={image}
+          src={props.image}
           alt="Course Photo"
-          className="bg-secondary w-1/3 lg:w-1/4 object-cover aspect-video rounded-l-lg"
+          className="bg-tertiary/80 object-cover aspect-video rounded-t-lg"
           loading="lazy"
         />
-        <div className="w-2/3 lg:w-3/4 h-44 flex flex-col justify-center px-3 overflow-clip py-4">
-          <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
-            {title}
-          </h1>
-          <div>
-            <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
-              Students: {students}
-            </p>
-            <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
-              Instructors: {instructor}
-            </p>
-            <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
-              Duration: {duration}
-            </p>
-          </div>
-        </div>
+      )}
+      <div className="h-24 flex flex-col justify-center px-3 w-full overflow-clip">
+        <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
+          {props.title}
+        </h1>
+        <Progress value={props.progress} className="rounded-[3px]" />
       </div>
     </Link>
   );
 }
 
-export function EnrolledCourseCard(
-  image: string,
-  title: string,
-  courseId: string,
-  progress: number
-) {
-  return (
-    <Link to={`/course/${courseId}`}>
-      <div className="min-w-[calc(100%-32px)] w-full max-w-sm flex flex-col bg-background rounded-lg sm:min-w-[360px] sm:max-w-sm">
-        <img
-          src={image}
-          alt="Course Photo"
-          className="bg-secondary object-cover aspect-video rounded-t-lg"
-          loading="lazy"
-        />
-        <div className="h-28 flex flex-col justify-center px-3 w-full overflow-clip">
-          <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
-            {title}
-          </h1>
-          <Progress value={progress} className="rounded-[3px]" />
-        </div>
-      </div>
-    </Link>
-  );
-}
+type instructorCourseCardProps = {
+  image?: string;
+  title: string;
+  students: number;
+  courseId: string;
+};
 
-export function InstructorCourseCard(
-  image: string,
-  title: string,
-  courseId: string
-) {
+export function InstructorCourseCard(props: instructorCourseCardProps) {
   return (
-    <Link to={`/course/${courseId}`}>
-      <div className="min-w-[calc(100%-32px)] w-full max-w-sm flex flex-col bg-background rounded-lg sm:min-w-[360px] sm:max-w-sm">
+    <Link
+      to={`/course/${props.courseId}`}
+      className="mx-auto w-full max-w-md flex flex-col bg-background rounded-lg shadow-sm"
+    >
+      {props.image && (
         <img
-          src={image}
+          src={props.image}
           alt="Course Photo"
-          className="bg-secondary object-cover aspect-video rounded-t-lg"
+          className="bg-tertiary/80 object-cover aspect-video rounded-t-lg"
           loading="lazy"
         />
-        <div className="h-24 flex flex-col justify-center px-3 w-full overflow-clip">
-          <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
-            {title}
-          </h1>
-        </div>
+      )}
+      <div className="h-20 flex flex-col justify-center px-3 w-full overflow-clip">
+        <h1 className="mb-3 font-medium line-clamp-2 w-full lg:text-lg">
+          {props.title}
+        </h1>
+        <p className="line-clamp-1 text-gray-700 block text-sm lg:text-sm+ dark:text-gray-300">
+            Students: {props.students}
+          </p>
       </div>
     </Link>
   );

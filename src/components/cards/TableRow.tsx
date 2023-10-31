@@ -12,6 +12,7 @@ function TableRow(props: PropsType) {
             src={props.image.image}
             alt={`${props.image.alt} icon`}
             className="h-5 w-5"
+            loading="eager"
           />
         )}
         <p className='text-black overflow-clip'>

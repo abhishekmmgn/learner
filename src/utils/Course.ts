@@ -3,8 +3,8 @@ import {
   doc,
   getDoc,
   getDocs,
-  setDoc,
   addDoc,
+  setDoc,
   deleteDoc,
   collection,
   updateDoc,
@@ -39,16 +39,33 @@ async function createCourse(props: CourseType) {
   }
 }
 
-async function getCourse(courseId: string) {
+async function getCourseDetails({ queryKey }: { queryKey: Array<string> }) {
+  const courseId = queryKey[1];
   try {
     const courseDocRef = doc(db, "courses", courseId);
     const courseDocSnap = await getDoc(courseDocRef);
 
     if (courseDocSnap.exists()) {
-      console.log(courseDocSnap.data());
+      // console.log(courseDocSnap.data());
       return courseDocSnap.data();
     } else {
       console.log("No such document!");
+    }
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getUserCourses({ queryKey }: { queryKey: Array<string> }) {
+  const userId = queryKey[1];
+  try {
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      return userSnap.data().courses;
+    } else {
+      console.log("No courses");
+      return [];
     }
   } catch (error) {
     return error;
@@ -69,12 +86,69 @@ async function getCourses() {
   }
 }
 
-async function getCoursesByTopics(topic: Array<string>) {
+async function getCoursesByUserId(userId: string) {
+  let userCourses;
+  let courses = [];
   try {
-    // capitalize the first letter of each topic
-    topic = topic.map((topic) => topic.charAt(0).toUpperCase() + topic.slice(1));
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      userCourses = userSnap.data().courses;
+    } else {
+      console.log("No courses");
+      return [];
+    }
+    courses = await Promise.all(
+      userCourses.map(async (courseId: string) => {
+        const courseRef = doc(db, "courses", courseId);
+        const courseSnap = await getDoc(courseRef);
+        return { ...courseSnap.data(), courseId: courseSnap.id };
+      })
+    );
+    return courses;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getEnrolledCourses(userId: string) {
+  let userCourses;
+  let courses = [];
+
+  try {
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      userCourses = userSnap.data().courses;
+    } else {
+      console.log("No courses");
+      return [];
+    }
+
+    const promises = userCourses.map(async (userCourse) => {
+      const courseRef = doc(db, "courses", userCourse.courseId);
+      const courseSnap = await getDoc(courseRef);
+      return {
+        title: courseSnap.data()?.title,
+        progress: userCourse.progress,
+        courseId: userCourse.courseId,
+      };
+    });
+
+    const courses = await Promise.all(promises);
+
+    // console.log(courses); // To remove
+    return courses;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getCoursesByTopics({ queryKey }: { queryKey: Array<string> }) {
+  const topic = queryKey[1];
+  try {
     const courseRef = collection(db, "courses");
-    const q = query(courseRef, where('topics', 'array-contains-any', topic));
+    const q = query(courseRef, where("topics", "array-contains-any", topic));
 
     const courseSnap = await getDocs(q);
     const courses = courseSnap.docs.map((doc) => ({
@@ -86,22 +160,49 @@ async function getCoursesByTopics(topic: Array<string>) {
     return error;
   }
 }
-
 async function enrollCourse(courseId: string) {
   try {
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User not authenticated");
+      return;
+    }
+
     // Add the course to the user's enrolled courses collection
-    const userCoursesDocRef = doc(db, "users", auth.currentUser.uid);
-    await updateDoc(userCoursesDocRef, {
-      enrolledCourses: arrayUnion({ courseId: courseId, progress: 0 }),
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    const userCourses = userSnap.data().courses;
+
+    if (userCourses) {
+      for (const course of userCourses) {
+        if (course.courseId === courseId) {
+          console.log("Course already enrolled");
+          return "Course already enrolled";
+        }
+      }
+      // Course is not enrolled, enroll now
+      await updateDoc(userRef, {
+        courses: arrayUnion({ courseId, progress: 0 }),
+      });
+    } else {
+      // 1st course
+      console.log("I was here.");
+      await setDoc(userRef, { courses: [{ courseId, progress: 0 }] });
+    }
+
+    // Increase student count of the course
+    const courseDocRef = doc(db, "courses", courseId);
+    await updateDoc(courseDocRef, {
+      students: FieldValue.increment(1),
     });
+
+    console.log("Enrolled in the course");
+    return "Enrolled in the course";
   } catch (error) {
+    console.error("Error enrolling in the course:", error);
     return error;
   }
-  // Increase student count of the course
-  const courseDocRef = doc(db, "courses", courseId);
-  await updateDoc(courseDocRef, {
-    students: FieldValue.increment(1),
-  });
 }
 
 async function editCourse(courseId: string) {
@@ -116,15 +217,14 @@ async function deleteCourse(courseId: string) {
       `courses/${auth.currentUser?.uid}/${courseId}`
     );
     deleteObject(imageRef);
-    deleteObject(imageRef);
 
     // Delete the course from the courses collection
     const courseDocRef = doc(db, "courses", courseId);
     await deleteDoc(courseDocRef);
 
     // Delete the course from the instructor's courses collection
-    const userCoursesDocRef = doc(db, `users/${auth.currentUser?.uid}/`);
-    await updateDoc(userCoursesDocRef, {
+    const userCoursesRef = doc(db, `users/${auth.currentUser?.uid}/`);
+    await updateDoc(userCoursesRef, {
       courses: arrayRemove(courseId),
     });
   } catch (error) {
@@ -176,9 +276,12 @@ export {
   createCourse,
   enrollCourse,
   editCourse,
-  getCourse,
+  getCourseDetails,
+  getUserCourses,
   getCourses,
+  getCoursesByUserId,
   getCoursesByTopics,
+  getEnrolledCourses,
   deleteCourse,
   deleteAllCourses,
   searchCourses,

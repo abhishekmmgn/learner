@@ -1,18 +1,10 @@
 import { ChevronRightIcon } from "@radix-ui/react-icons";
-import { CourseCard, EnrolledCourseCard } from "./CourseCard";
+import { EnrolledCourseCard } from "./CourseCard";
+import { enrolledCourseType } from "@/types/CourseType";
 
 type PropsType = {
   title: string;
-  enrolled: boolean;
-  progress?: number;
-  courses: {
-    title: string;
-    image: string;
-    students: number;
-    instructor: string;
-    duration: string;
-    courseId: string;
-  }[];
+  courses: Array<enrolledCourseType>;
 };
 function CourseCardGallery(props: PropsType) {
   return (
@@ -24,29 +16,17 @@ function CourseCardGallery(props: PropsType) {
         <ChevronRightIcon className="w-5 h-5 sm:hidden" />
       </div>
 
-      {/* <div className="h-full flex flex-row gap-4 pr-4 overflow-visible overflow-x-scroll no-scrollbar">
-        {props.enrolled ? (
-          {props.courses?.map((course, index) => (
-            <EnrolledCourseCard
-              title={course.title}
-              progress={props.progress}
-              image={course.image}
-              key={index}
-            />
-          ))}
-        ) : (
-        {props.courses?.map((course, index) => (
-          <CourseCard
+      <div className="h-full flex flex-row gap-4 pr-4 overflow-visible overflow-x-scroll no-scrollbar">
+        {props.courses?.map((course, index: number) => (
+          <EnrolledCourseCard
             title={course.title}
-            duration={course.duration}
-            students={course.students}
-            instructor={course.instructor}
+            progress={course.progress}
             image={course.image}
+            courseId={course.courseId}
             key={index}
           />
         ))}
-        )}
-      </div> */}
+      </div>
     </div>
   );
 }

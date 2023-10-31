@@ -126,6 +126,7 @@ export default function CreateCourseForm() {
               src={imageURL}
               alt="Cover Image"
               className="w-full aspect-video bg-background"
+              loading="eager"
             />
             <Input
               id="image"
